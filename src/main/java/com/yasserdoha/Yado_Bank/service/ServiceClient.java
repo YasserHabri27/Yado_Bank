@@ -27,16 +27,16 @@ public class ServiceClient {
     private DepotOperation depotOperation;
 
     public List<CompteBancaire> obtenirComptesClient(Long idClient) {
-        return depotCompteBancaire.trouverParClient_Id(idClient);
+        return depotCompteBancaire.findByClient_Id(idClient);
     }
 
     public Page<Operation> obtenirOperationsCompte(String rib, Pageable pageable) {
-        return depotOperation.trouverParCompte_RibOrderByDateOperationDesc(rib, pageable);
+        return depotOperation.findByCompte_RibOrderByDateOperationDesc(rib, pageable);
     }
 
     @Transactional
     public void virement(String nomUtilisateur, RequeteVirementDto requete) {
-        CompteBancaire compteSource = depotCompteBancaire.trouverParRib(requete.getRibSource())
+        CompteBancaire compteSource = depotCompteBancaire.findByRib(requete.getRibSource())
                 .orElseThrow(() -> new RuntimeException("Erreur: Compte source non trouvé."));
 
         if (!compteSource.getClient().getUtilisateur().getNomUtilisateur().equals(nomUtilisateur)) {
@@ -52,7 +52,7 @@ public class ServiceClient {
             throw new RuntimeException("Erreur: Solde insuffisant.");
         }
 
-        CompteBancaire compteDest = depotCompteBancaire.trouverParRib(requete.getRibDestination())
+        CompteBancaire compteDest = depotCompteBancaire.findByRib(requete.getRibDestination())
                 .orElseThrow(() -> new RuntimeException("Erreur: Compte destinataire non trouvé."));
 
         compteSource.setSolde(compteSource.getSolde().subtract(requete.getMontant()));

@@ -38,7 +38,7 @@ public class ServiceAgent {
             throw new RuntimeException("Erreur: Email déjà utilisé!");
         }
 
-        if (depotClient.existeParNumeroIdentite(requete.getNumeroIdentite())) {
+        if (depotClient.existsByNumeroIdentite(requete.getNumeroIdentite())) {
             throw new RuntimeException("Erreur: Numéro d'identité déjà existant!");
         }
 
@@ -68,14 +68,14 @@ public class ServiceAgent {
 
     @Transactional
     public CompteBancaire creerCompte(RequeteCompteBancaireDto requete) {
-        Client client = depotClient.trouverParNumeroIdentite(requete.getNumeroIdentiteClient())
+        Client client = depotClient.findByNumeroIdentite(requete.getNumeroIdentiteClient())
                 .orElseThrow(() -> new RuntimeException(
                         "Erreur: Client non trouvé avec l'identité: " + requete.getNumeroIdentiteClient()));
 
         if (requete.getRib() == null || requete.getRib().length() != 24) {
             throw new RuntimeException("Erreur: RIB invalide. Doit contenir 24 caractères.");
         }
-        if (depotCompteBancaire.trouverParRib(requete.getRib()).isPresent()) {
+        if (depotCompteBancaire.findByRib(requete.getRib()).isPresent()) {
             throw new RuntimeException("Erreur: Ce RIB existe déjà.");
         }
 

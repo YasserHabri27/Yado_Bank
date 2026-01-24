@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface DepotClient extends JpaRepository<Client, Long> {
-    Optional<Client> trouverParNumeroIdentite(String numeroIdentite);
+    Optional<Client> findByNumeroIdentite(String numeroIdentite);
 
-    Boolean existeParNumeroIdentite(String numeroIdentite);
+    Boolean existsByNumeroIdentite(String numeroIdentite);
 
-    Optional<Client> trouverParUtilisateur_NomUtilisateur(String nomUtilisateur);
+    Optional<Client> findByUtilisateur_NomUtilisateur(String nomUtilisateur);
 }

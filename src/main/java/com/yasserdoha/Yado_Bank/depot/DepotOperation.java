@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DepotOperation extends JpaRepository<Operation, Long> {
-    List<Operation> trouverParCompte_Rib(String rib);
+    List<Operation> findByCompte_Rib(String rib);
 
-    Page<Operation> trouverParCompte_RibOrderByDateOperationDesc(String rib, Pageable pageable);
+    Page<Operation> findByCompte_RibOrderByDateOperationDesc(String rib, Pageable pageable);
 }

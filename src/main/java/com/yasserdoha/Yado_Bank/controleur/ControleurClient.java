@@ -29,7 +29,7 @@ public class ControleurClient {
     @GetMapping("/comptes")
     public ResponseEntity<List<CompteBancaire>> obtenirMesComptes(Principal principal) {
         String nomUtilisateur = principal.getName();
-        Long idClient = depotClient.trouverParUtilisateur_NomUtilisateur(nomUtilisateur).get().getId();
+        Long idClient = depotClient.findByUtilisateur_NomUtilisateur(nomUtilisateur).get().getId();
         return ResponseEntity.ok(serviceClient.obtenirComptesClient(idClient));
     }
 

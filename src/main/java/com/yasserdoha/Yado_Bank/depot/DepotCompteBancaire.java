@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DepotCompteBancaire extends JpaRepository<CompteBancaire, String> {
-    List<CompteBancaire> trouverParClient_Id(Long clientId);
+    List<CompteBancaire> findByClient_Id(Long clientId);
 
-    Optional<CompteBancaire> trouverParRib(String rib);
+    Optional<CompteBancaire> findByRib(String rib);
 }
