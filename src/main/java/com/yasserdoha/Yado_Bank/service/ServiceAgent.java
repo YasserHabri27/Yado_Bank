@@ -34,7 +34,7 @@ public class ServiceAgent {
 
     @Transactional
     public Client creerClient(RequeteClientDto requete) {
-        if (depotUtilisateur.existeParEmail(requete.getEmail())) {
+        if (depotUtilisateur.existsByEmail(requete.getEmail())) {
             throw new RuntimeException("Erreur: Email déjà utilisé!");
         }
 

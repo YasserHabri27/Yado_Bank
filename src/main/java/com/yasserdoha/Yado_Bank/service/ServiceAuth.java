@@ -40,13 +40,13 @@ public class ServiceAuth {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String role = userDetails.getAuthorities().stream().findFirst().get().getAuthority();
 
-        Utilisateur utilisateur = depotUtilisateur.trouverParNomUtilisateur(userDetails.getUsername()).orElseThrow();
+        Utilisateur utilisateur = depotUtilisateur.findByNomUtilisateur(userDetails.getUsername()).orElseThrow();
 
         return new ReponseJwt(jwt, utilisateur.getId(), userDetails.getUsername(), utilisateur.getEmail(), role);
     }
 
     public void changerMotDePasse(String nomUtilisateur, RequeteChangementMotDePasse requete) {
-        Utilisateur utilisateur = depotUtilisateur.trouverParNomUtilisateur(nomUtilisateur)
+        Utilisateur utilisateur = depotUtilisateur.findByNomUtilisateur(nomUtilisateur)
                 .orElseThrow(() -> new RuntimeException("Erreur: Utilisateur non trouvé."));
 
         if (!encodeurMotDePasse.matches(requete.getAncienMotDePasse(), utilisateur.getMotDePasse())) {

@@ -15,7 +15,7 @@ public class DataInitializer {
     CommandLineRunner init(DepotUtilisateur depotUtilisateur, PasswordEncoder passwordEncoder) {
         return args -> {
             // Check if Agent exists
-            if (!depotUtilisateur.existeParNomUtilisateur("agent@yadobank.com")) {
+            if (!depotUtilisateur.existsByNomUtilisateur("agent@yadobank.com")) {
                 Utilisateur agent = new Utilisateur();
                 agent.setNomUtilisateur("agent@yadobank.com");
                 agent.setEmail("agent@yadobank.com");

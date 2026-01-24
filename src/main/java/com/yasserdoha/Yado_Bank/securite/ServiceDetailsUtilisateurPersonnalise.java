@@ -17,7 +17,7 @@ public class ServiceDetailsUtilisateurPersonnalise implements UserDetailsService
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utilisateur utilisateur = depotUtilisateur.trouverParNomUtilisateur(username)
+        Utilisateur utilisateur = depotUtilisateur.findByNomUtilisateur(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "Utilisateur non trouvé avec le nom d'utilisateur: " + username));
 
