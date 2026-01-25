@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { CreditCard, ArrowUpRight, ArrowDownLeft, ChevronDown, Activity, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLangue } from '../../contexte/ContexteLangue';
 
 const TableauBordClient = () => {
+    const { t } = useLangue();
     const [comptes, setComptes] = useState([]);
     const [compteSelectionne, setCompteSelectionne] = useState(null);
     const [operations, setOperations] = useState([]);
@@ -35,10 +37,13 @@ const TableauBordClient = () => {
         }
     };
 
+    const [totalPages, setTotalPages] = useState(0);
+
     const recupererOperations = async (rib, pageActuelle) => {
         try {
             const reponse = await api.get(`/client/operations/${rib}?page=${pageActuelle}&size=${taille}`);
             setOperations(reponse.data.content);
+            setTotalPages(reponse.data.totalPages);
         } catch (erreur) {
             console.error("Erreur lors de la récupération des opérations", erreur);
         }
@@ -50,16 +55,16 @@ const TableauBordClient = () => {
         <div className="space-y-10 animate-fade-in">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                    <span className="text-brand-gold font-bold tracking-wider text-sm uppercase mb-1 block">Espace Client</span>
-                    <h2 className="text-3xl font-bold text-white tracking-tight">Mes Comptes</h2>
-                    <p className="text-slate-400">Vue d'ensemble de votre patrimoine.</p>
+                    <span className="text-brand-gold font-bold tracking-wider text-sm uppercase mb-1 block">{t('client.badge')}</span>
+                    <h2 className="text-3xl font-bold text-white tracking-tight">{t('client.title')}</h2>
+                    <p className="text-slate-400">{t('client.subtitle')}</p>
                 </div>
                 <Link
                     to="/client/virement"
                     className="btn-premium px-8 py-3 flex items-center gap-3 backdrop-blur-md"
                 >
                     <Send className="w-4 h-4" />
-                    Nouveau Virement
+                    {t('client.newTransfer')}
                 </Link>
             </div>
 
@@ -89,9 +94,9 @@ const TableauBordClient = () => {
                         </div>
 
                         <div className="relative z-10">
-                            <p className={`text-sm mb-1 font-medium ${compteSelectionne?.rib === cpt.rib ? 'text-brand-950/70' : 'text-slate-500'}`}>Solde Actuel</p>
+                            <p className={`text-sm mb-1 font-medium ${compteSelectionne?.rib === cpt.rib ? 'text-brand-950/70' : 'text-slate-500'}`}>{t('client.balance')}</p>
                             <h3 className="text-3xl font-bold tracking-tight mb-4">
-                                {cpt.solde.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} <span className="text-lg">DH</span>
+                                {cpt.solde.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} <span className="text-lg">MAD</span>
                             </h3>
                             <div className="font-mono text-xs opacity-70 tracking-widest break-all">
                                 {cpt.rib}
@@ -106,7 +111,7 @@ const TableauBordClient = () => {
                 <div className="p-8 border-b border-white/10 flex justify-between items-center bg-white/5">
                     <h3 className="font-bold text-xl text-white flex items-center gap-3">
                         <Activity className="w-5 h-5 text-brand-gold" />
-                        Historique des Opérations
+                        {t('client.history')}
                     </h3>
                     {compteSelectionne && (
                         <span className="text-xs font-mono text-brand-gold bg-brand-gold/10 px-4 py-1.5 rounded-full border border-brand-gold/20">
@@ -119,10 +124,10 @@ const TableauBordClient = () => {
                     <table className="w-full">
                         <thead className="bg-white/5 text-slate-400 text-xs uppercase font-bold tracking-wider">
                             <tr>
-                                <th className="px-8 py-5 text-left">Type</th>
-                                <th className="px-8 py-5 text-left">Description</th>
-                                <th className="px-8 py-5 text-left">Date</th>
-                                <th className="px-8 py-5 text-right">Montant</th>
+                                <th className="px-8 py-5 text-left">{t('common.type')}</th>
+                                <th className="px-8 py-5 text-left">{t('common.description')}</th>
+                                <th className="px-8 py-5 text-left">{t('common.date')}</th>
+                                <th className="px-8 py-5 text-right">{t('common.amount')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
@@ -143,14 +148,14 @@ const TableauBordClient = () => {
                                         <td className={`px-8 py-5 text-sm font-bold text-right ${op.type === 'CREDIT' ? 'text-green-400' : 'text-white'
                                             }`}>
                                             {op.type === 'DEBIT' ? '-' : '+'}
-                                            {op.montant.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} DH
+                                            {op.montant.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD
                                         </td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
                                     <td colSpan="4" className="px-8 py-16 text-center text-slate-500">
-                                        Aucune opération trouvée pour ce compte.
+                                        {t('client.noOps')}
                                     </td>
                                 </tr>
                             )}
@@ -165,15 +170,15 @@ const TableauBordClient = () => {
                         onClick={() => setPage(p => Math.max(0, p - 1))}
                         className="px-6 py-2 text-sm font-bold text-slate-300 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:text-white hover:border-brand-gold/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
-                        Précédent
+                        {t('common.previous')}
                     </button>
                     <span className="text-sm font-mono text-brand-gold/70">Page {page + 1}</span>
                     <button
-                        disabled={operations.length < taille}
+                        disabled={page >= totalPages - 1}
                         onClick={() => setPage(p => p + 1)}
                         className="px-6 py-2 text-sm font-bold text-slate-300 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:text-white hover:border-brand-gold/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     >
-                        Suivant
+                        {t('common.next')}
                     </button>
                 </div>
             </div>

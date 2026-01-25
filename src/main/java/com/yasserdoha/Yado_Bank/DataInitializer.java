@@ -24,6 +24,29 @@ public class DataInitializer {
                 depotUtilisateur.save(agent);
                 System.out.println(">>> Seeded Agent: agent@yadobank.com / password123");
             }
+
+            // Check if Client exists
+            if (!depotUtilisateur.existsByNomUtilisateur("client@yadobank.com")) {
+                Utilisateur client = new Utilisateur();
+                client.setNomUtilisateur("client@yadobank.com"); // Using email as username for consistency
+                client.setEmail("client@yadobank.com");
+                client.setMotDePasse(passwordEncoder.encode("password123"));
+                client.setRole(Role.CLIENT);
+                depotUtilisateur.save(client);
+                depotUtilisateur.save(client);
+                System.out.println(">>> Seeded Client: client@yadobank.com / password123");
+            }
+
+            // Check if Admin exists
+            if (!depotUtilisateur.existsByNomUtilisateur("admin@yadobank.com")) {
+                Utilisateur admin = new Utilisateur();
+                admin.setNomUtilisateur("admin@yadobank.com");
+                admin.setEmail("admin@yadobank.com");
+                admin.setMotDePasse(passwordEncoder.encode("admin123"));
+                admin.setRole(Role.ADMIN);
+                depotUtilisateur.save(admin);
+                System.out.println(">>> Seeded Admin: admin@yadobank.com / admin123");
+            }
         };
     }
 }

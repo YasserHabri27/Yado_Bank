@@ -38,4 +38,16 @@ public class ControleurAuth {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/mot-de-passe-oublie")
+    public ResponseEntity<?> motDePasseOublie(@RequestBody String identifiant) {
+        try {
+            // Check if input is a JSON string or raw string, simple cleanup
+            String cleanId = identifiant.replaceAll("[\"{}]", "").split(":")[1].trim();
+            serviceAuth.motDePasseOublie(cleanId);
+            return ResponseEntity.ok("Un email de réinitialisation a été envoyé.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

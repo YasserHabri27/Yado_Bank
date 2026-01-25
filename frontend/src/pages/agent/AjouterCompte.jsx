@@ -49,7 +49,7 @@ const AjouterCompte = () => {
                 </Link>
                 <div>
                     <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-1 block">Gestion Bancaire</span>
-                    <h2 className="text-2xl font-bold text-white tracking-tight">Ouverture de Compte</h2>
+                    <h2 className="text-2xl font-bold text-brand-950 dark:text-white tracking-tight">Ouverture de Compte</h2>
                 </div>
             </div>
 
@@ -72,7 +72,7 @@ const AjouterCompte = () => {
                                 <input
                                     type="text"
                                     name="numeroIdentiteClient"
-                                    className="input-premium pl-12"
+                                    className="input-premium pl-16"
                                     placeholder="ex: AB123456"
                                     value={donneesFormulaire.numeroIdentiteClient}
                                     onChange={gererChangement}
@@ -106,7 +106,7 @@ const AjouterCompte = () => {
                                 <input
                                     type="number"
                                     name="soldeInitial"
-                                    className="input-premium pl-12 font-mono text-lg"
+                                    className="input-premium pl-16 font-mono text-lg"
                                     placeholder="0.00"
                                     value={donneesFormulaire.soldeInitial}
                                     onChange={gererChangement}

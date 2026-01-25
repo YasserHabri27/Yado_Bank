@@ -11,4 +11,6 @@ public interface DepotOperation extends JpaRepository<Operation, Long> {
     List<Operation> findByCompte_Rib(String rib);
 
     Page<Operation> findByCompte_RibOrderByDateOperationDesc(String rib, Pageable pageable);
+
+    java.util.Optional<Operation> findTopByCompte_RibOrderByDateOperationDesc(String rib);
 }

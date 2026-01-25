@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
             if (reponse.data.token) {
                 localStorage.setItem('utilisateur', JSON.stringify(reponse.data));
                 setUtilisateur(reponse.data);
-                return true;
+                return reponse.data; // Return user to allow immediate redirection logic in UI
             }
         } catch (erreur) {
             throw erreur;
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ utilisateur, connexion, deconnexion, chargement }}>
+        <AuthContext.Provider value={{ utilisateur, login: connexion, deconnexion, chargement }}>
             {!chargement && children}
         </AuthContext.Provider>
     );

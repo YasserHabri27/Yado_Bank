@@ -46,7 +46,7 @@ const AjouterClient = () => {
                 </Link>
                 <div>
                     <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-1 block">Nouveau Dossier</span>
-                    <h2 className="text-2xl font-bold text-white tracking-tight">Enregistrement Client</h2>
+                    <h2 className="text-2xl font-bold text-brand-950 dark:text-white tracking-tight">Enregistrement Client</h2>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@ const AjouterClient = () => {
                                     <input
                                         type="text"
                                         name="numeroIdentite"
-                                        className="input-premium pl-12"
+                                        className="input-premium pl-16"
                                         placeholder="ex: AB123456"
                                         value={donneesFormulaire.numeroIdentite}
                                         onChange={gererChangement}
@@ -85,7 +85,7 @@ const AjouterClient = () => {
                                     <input
                                         type="email"
                                         name="email"
-                                        className="input-premium pl-12"
+                                        className="input-premium pl-16"
                                         placeholder="client@exemple.com"
                                         value={donneesFormulaire.email}
                                         onChange={gererChangement}
@@ -130,7 +130,7 @@ const AjouterClient = () => {
                                     <input
                                         type="date"
                                         name="dateNaissance"
-                                        className="input-premium pl-12"
+                                        className="input-premium pl-16"
                                         value={donneesFormulaire.dateNaissance}
                                         onChange={gererChangement}
                                         required
@@ -144,7 +144,7 @@ const AjouterClient = () => {
                                     <input
                                         type="text"
                                         name="adressePostale"
-                                        className="input-premium pl-12"
+                                        className="input-premium pl-16"
                                         placeholder="Adresse complète"
                                         value={donneesFormulaire.adressePostale}
                                         onChange={gererChangement}
