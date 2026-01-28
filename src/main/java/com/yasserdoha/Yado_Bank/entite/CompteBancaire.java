@@ -21,7 +21,7 @@ public class CompteBancaire {
     private BigDecimal solde;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private StatutCompte statut;
 
     @ManyToOne

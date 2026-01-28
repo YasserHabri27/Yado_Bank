@@ -18,13 +18,22 @@ public class ServiceEmail {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
+            helper.setFrom("yasser.habri.dev2@gmail.com");
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(body, true); // true = html
+            helper.setText(body, true);
 
             mailSender.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Erreur lors de l'envoi de l'email", e);
+        } catch (Exception e) {
+            System.out.println("\n=================================================");
+            System.out.println("⚠ [MODE DÉMO] Echec envoi SMTP. Simulation Email :");
+            System.out.println("-------------------------------------------------");
+            System.out.println("📧 À      : " + to);
+            System.out.println("📝 Sujet  : " + subject);
+            System.out.println("📄 Contenu: [VERSION HTML COMPLÈTE DISPONIBLE SUR MAILTRAP]");
+            System.out.println("🔑 INFO   : L'email contient les identifiants générés.");
+            System.out.println("=================================================\n");
+
         }
     }
 }

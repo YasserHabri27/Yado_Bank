@@ -48,39 +48,23 @@ public class ServiceAgent {
 
         // Create Utilisateur
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setNomUtilisateur(requete.getEmail()); // Username is email by default
+        utilisateur.setNomUtilisateur(requete.getEmail());
         utilisateur.setEmail(requete.getEmail());
         String motDePasseBrut = UUID.randomUUID().toString().substring(0, 8);
         utilisateur.setMotDePasse(encodeurMotDePasse.encode(motDePasseBrut));
         utilisateur.setRole(Role.CLIENT);
 
-        // Send Email (RG_7)
-        try {
-            String subject = "Bienvenue chez Yado Bank - Vos identifiants";
-            String body = "<h1>Bienvenue " + requete.getPrenom() + " " + requete.getNom() + ",</h1>"
-                    + "<p>Votre compte client a été créé avec succès.</p>"
-                    + "<p><strong>Identifiant :</strong> " + requete.getEmail() + "</p>"
-                    + "<p><strong>Mot de passe provisoire :</strong> <span style='color: #D4AF37; font-weight: bold;'>"
-                    + motDePasseBrut + "</span></p>"
-                    + "<p>Veuillez changer votre mot de passe dès votre première connexion.</p>";
+    }catch(
 
-            serviceEmail.sendEmail(requete.getEmail(), subject, body);
-        } catch (Exception e) {
-            System.err.println("Erreur envoi email: " + e.getMessage());
-            // We don't block creation if email fails, but in prod we might want to handle
-            // differently
-        }
+    Exception e)
+    {
+        System.err.println("Erreur envoi email: " + e.getMessage());
+    }
 
-        // Create Client
-        Client client = new Client();
-        client.setNumeroIdentite(requete.getNumeroIdentite());
-        client.setPrenom(requete.getPrenom());
-        client.setNom(requete.getNom());
-        client.setDateNaissance(requete.getDateNaissance());
-        client.setAdressePostale(requete.getAdressePostale());
-        client.setUtilisateur(utilisateur);
+    // Create Client
+    Client client = new Client();client.setNumeroIdentite(requete.getNumeroIdentite());client.setPrenom(requete.getPrenom());client.setNom(requete.getNom());client.setDateNaissance(requete.getDateNaissance());client.setAdressePostale(requete.getAdressePostale());client.setUtilisateur(utilisateur);
 
-        return depotClient.save(client);
+    return depotClient.save(client);
     }
 
     public List<Client> tousLesClients() {
@@ -107,8 +91,7 @@ public class ServiceAgent {
         client.setNom(requete.getNom());
         client.setDateNaissance(requete.getDateNaissance());
         client.setAdressePostale(requete.getAdressePostale());
-        // We do not update email/username here to avoid complex auth sync issues for
-        // now
+        client.setAdressePostale(requete.getAdressePostale());
 
         return depotClient.save(client);
     }
@@ -116,11 +99,15 @@ public class ServiceAgent {
     @Transactional
     public void supprimerClient(Long id) {
         Client client = clientParId(id);
+
+    @Transactional
+    public void supprimerClient(Long id) {
+        Client client = clientParId(id);
+
+        List<CompteBancaire> comptes = depotCompteBancaire.findByClient_Id(id);
+        depotCompteBancaire.deleteAll(comptes);
+
         depotClient.delete(client);
-        // Note: JPA Cascade will handle Utilisateur deletion if configured,
-        // or we manually delete the user. Our Entity Client has @OneToOne(cascade =
-        // CascadeType.ALL)
-        // so it should delete the User as well.
     }
 
     @Transactional

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/agent")
@@ -17,8 +18,6 @@ public class ControleurAgent {
 
     @Autowired
     private ServiceAgent serviceAgent;
-
-import jakarta.validation.Valid;
 
     @PostMapping("/clients")
     public ResponseEntity<?> creerClient(@Valid @RequestBody RequeteClientDto requete) {
@@ -90,7 +89,6 @@ import jakarta.validation.Valid;
     @PutMapping("/comptes/{rib}/statut")
     public ResponseEntity<?> changerStatutCompte(@PathVariable String rib, @RequestBody String statutStr) {
         try {
-            // Remove JSON quotes if present
             statutStr = statutStr.replace("\"", "");
             com.yasserdoha.Yado_Bank.enumerations.StatutCompte statut = com.yasserdoha.Yado_Bank.enumerations.StatutCompte
                     .valueOf(statutStr);

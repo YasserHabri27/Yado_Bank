@@ -10,12 +10,13 @@ const Connexion = () => {
     const [motDePasse, setMotDePasse] = useState('');
     const [erreur, setErreur] = useState('');
     const [loading, setLoading] = useState(false);
-    const [isAgent, setIsAgent] = useState(false); // Toggle state
-    const { login } = useAuth();
+    const [isAgent, setIsAgent] = useState(false);
+    const { login, deconnexion } = useAuth();
     const { t } = useLangue();
     const navigate = useNavigate();
 
-    // Clear inputs when switching tabs
+    const navigate = useNavigate();
+
     useEffect(() => {
         setNomUtilisateur('');
         setMotDePasse('');
@@ -27,20 +28,32 @@ const Connexion = () => {
         setErreur('');
         setLoading(true);
         try {
-            const role = await login(nomUtilisateur, motDePasse);
+        try {
+            const userData = await login(nomUtilisateur, motDePasse);
+            const role = userData.role;
 
-            // Basic validation to prevent client login on agent tab and vice versa IF needed (optional, backend handling is better)
-            // For now, we trust the backend response but redirect correctly
+            if (!isAgent && (role === 'ROLE_AGENT_GUICHET' || role === 'ROLE_ADMIN')) {
+                deconnexion();
+                throw new Error("Accès refusé : Veuillez utiliser l'Espace Pro.");
+            }
+            if (isAgent && role === 'ROLE_CLIENT') {
+                deconnexion();
+                throw new Error("Accès refusé : Veuillez utiliser l'Espace Client.");
+            }
+
             if (role === 'ROLE_AGENT_GUICHET') {
                 navigate('/agent/tableau-bord');
             } else if (role === 'ROLE_ADMIN') {
-                // Assuming backend returns ROLE_ADMIN
                 navigate('/admin/tableau-bord');
             } else {
                 navigate('/');
             }
         } catch (err) {
-            setErreur('Login ou mot de passe erronés');
+            if (err.message && err.message.includes("Accès refusé")) {
+                setErreur(err.message);
+            } else {
+                setErreur('Login ou mot de passe erronés');
+            }
         } finally {
             setLoading(false);
         }

@@ -10,4 +10,6 @@ public interface DepotUtilisateur extends JpaRepository<Utilisateur, Long> {
     Boolean existsByNomUtilisateur(String nomUtilisateur);
 
     Boolean existsByEmail(String email);
+
+    Optional<Utilisateur> findByEmail(String email);
 }
