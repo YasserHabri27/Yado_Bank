@@ -1,5 +1,5 @@
-import { createContext, useState, useContext, useEffect } from ;
-import api from ;
+import { createContext, useState, useContext, useEffect } from 'react';
+import api from '../services/api';
 
 const AuthContext = createContext({});
 
@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [chargement, setChargement] = useState(true);
 
     useEffect(() => {
-        const utilisateurStocke = localStorage.getItem();
+        const utilisateurStocke = localStorage.getItem('utilisateur');
         if (utilisateurStocke) {
             setUtilisateur(JSON.parse(utilisateurStocke));
         }
@@ -17,11 +17,11 @@ export const AuthProvider = ({ children }) => {
 
     const connexion = async (nomUtilisateur, motDePasse) => {
         try {
-            const reponse = await api.post(, { nomUtilisateur, motDePasse });
+            const reponse = await api.post('/auth/connexion', { nomUtilisateur, motDePasse });
             if (reponse.data.token) {
-                localStorage.setItem(, JSON.stringify(reponse.data));
+                localStorage.setItem('utilisateur', JSON.stringify(reponse.data));
                 setUtilisateur(reponse.data);
-                return reponse.data; 
+                return reponse.data; // Return user to allow immediate redirection logic in UI
             }
         } catch (erreur) {
             throw erreur;
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const deconnexion = () => {
-        localStorage.removeItem();
+        localStorage.removeItem('utilisateur');
         setUtilisateur(null);
     };
 

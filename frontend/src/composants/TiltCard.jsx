@@ -1,4 +1,4 @@
-import { useRef, useState } from ;
+import { useRef, useState } from 'react';
 
 const TiltCard = ({ children, className = "" }) => {
     const ref = useRef(null);
@@ -15,7 +15,7 @@ const TiltCard = ({ children, className = "" }) => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -10; 
+        const rotateX = ((y - centerY) / centerY) * -10; // Max tilt 10deg
         const rotateY = ((x - centerX) / centerX) * 10;
 
         setRotation({ x: rotateX, y: rotateY });
@@ -39,7 +39,7 @@ const TiltCard = ({ children, className = "" }) => {
             className={`transition-transform duration-100 ease-out ${className}`}
             style={{
                 transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale3d(${isHovered ? 1.02 : 1}, ${isHovered ? 1.02 : 1}, 1)`,
-                transformStyle: 
+                transformStyle: 'preserve-3d'
             }}
         >
             {children}

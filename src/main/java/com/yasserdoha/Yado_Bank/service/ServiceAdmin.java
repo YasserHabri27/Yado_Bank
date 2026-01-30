@@ -34,7 +34,7 @@ public class ServiceAdmin {
         return StatistiquesAdmin.builder()
                 .nombreAgentsActifs(nbAgents)
                 .volumeTransactions(nbTransactions)
-                .santeSysteme("100%") 
+                .santeSysteme("100%") // Logiciel fonctionnel
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class ServiceAdmin {
 
         Utilisateur agent = new Utilisateur();
         agent.setNomUtilisateur(nomUtilisateur);
-        agent.setEmail(nomUtilisateur); 
+        agent.setEmail(nomUtilisateur); // Using username as email for simplicity or can take separate email
         agent.setMotDePasse(passwordEncoder.encode(motDePasse));
         agent.setRole(Role.AGENT_GUICHET);
 

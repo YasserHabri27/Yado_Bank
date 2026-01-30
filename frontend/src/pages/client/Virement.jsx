@@ -1,19 +1,19 @@
-import { useState, useEffect } from ;
-import api from ;
-import { useNavigate, Link } from ;
-import { ArrowLeft, Send, CreditCard, FileText, DollarSign, Loader2, CheckCircle, AlertTriangle, ShieldCheck } from ;
+import { useState, useEffect } from 'react';
+import api from '../../services/api';
+import { useNavigate, Link } from 'react-router-dom';
+import { ArrowLeft, Send, CreditCard, FileText, DollarSign, Loader2, CheckCircle, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 const Virement = () => {
     const navigate = useNavigate();
     const [comptes, setComptes] = useState([]);
     const [chargement, setChargement] = useState(false);
     const [donneesFormulaire, setDonneesFormulaire] = useState({
-        ribSource: ,
-        ribDestination: ,
-        montant: ,
-        description: 
+        ribSource: '',
+        ribDestination: '',
+        montant: '',
+        description: ''
     });
-    const [message, setMessage] = useState({ type: , text:  });
+    const [message, setMessage] = useState({ type: '', text: '' });
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Virement = () => {
 
     const recupererComptes = async () => {
         try {
-            const reponse = await api.get();
+            const reponse = await api.get('/client/comptes');
             setComptes(reponse.data);
             if (reponse.data.length > 0) {
                 setDonneesFormulaire(precedent => ({ ...precedent, ribSource: reponse.data[0].rib }));
@@ -38,32 +38,32 @@ const Virement = () => {
 
     const preValiderFormulaire = (e) => {
         e.preventDefault();
-        setMessage({ type: , text:  });
+        setMessage({ type: '', text: '' });
 
         if (donneesFormulaire.montant <= 0) {
-            setMessage({ type: , text:  });
+            setMessage({ type: 'error', text: 'Le montant doit être positif.' });
             return;
         }
         if (donneesFormulaire.ribSource === donneesFormulaire.ribDestination) {
-            setMessage({ type: , text:  });
+            setMessage({ type: 'error', text: 'Vous ne pouvez pas effectuer un virement vers le même compte.' });
             return;
         }
 
-        
+        // Show confirmation modal
         setShowConfirmModal(true);
     };
 
     const effectuerVirement = async () => {
         setChargement(true);
-        setShowConfirmModal(false); 
+        setShowConfirmModal(false); // Close modal
 
         try {
-            await api.post(, donneesFormulaire);
-            setMessage({ type: , text:  });
-            setTimeout(() => navigate(), 2000);
+            await api.post('/client/virement', donneesFormulaire);
+            setMessage({ type: 'success', text: 'Virement effectué avec succès !' });
+            setTimeout(() => navigate('/client/tableau-bord'), 2000);
         } catch (error) {
             const errorMsg = error.response?.data || "Une erreur est survenue lors du virement.";
-            setMessage({ type: , text: typeof errorMsg ===  ? errorMsg : JSON.stringify(errorMsg) });
+            setMessage({ type: 'error', text: typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg) });
         } finally {
             setChargement(false);
         }
@@ -71,7 +71,7 @@ const Virement = () => {
 
     return (
         <div className="max-w-4xl mx-auto py-8 animate-fade-in relative z-0">
-            {}
+            {/* Background Decorations */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -z-10"></div>
 
@@ -89,16 +89,16 @@ const Virement = () => {
                             </div>
                             Virement Bancaire
                         </h2>
-                        <p className="text-slate-300 ml-[4.5rem] mt-2 max-w-md">Envoyez de limporte quel compte Yado Bank.</p>
+                        <p className="text-slate-300 ml-[4.5rem] mt-2 max-w-md">Envoyez de l'argent en toute sécurité vers n'importe quel compte Yado Bank.</p>
                     </div>
                 </div>
 
                 <div className="p-8 md:p-10 bg-black/20">
                     {message.text && (
-                        <div className={`p-6 rounded-2xl mb-8 flex items-start gap-4 animate-slide-up shadow-lg ${message.type ===  ?  : }`}>
-                            {message.type ===  ? <CheckCircle className="w-6 h-6 shrink-0" /> : <AlertTriangle className="w-6 h-6 shrink-0" />}
+                        <div className={`p-6 rounded-2xl mb-8 flex items-start gap-4 animate-slide-up shadow-lg ${message.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
+                            {message.type === 'success' ? <CheckCircle className="w-6 h-6 shrink-0" /> : <AlertTriangle className="w-6 h-6 shrink-0" />}
                             <div>
-                                <h4 className="font-bold mb-1">{message.type ===  ?  : }</h4>
+                                <h4 className="font-bold mb-1">{message.type === 'success' ? 'Succès' : 'Attention'}</h4>
                                 <p className="text-sm opacity-90">{message.text}</p>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ const Virement = () => {
 
                     <form onSubmit={preValiderFormulaire} className="space-y-8">
                         <div className="grid md:grid-cols-2 gap-8">
-                            {}
+                            {/* Source Account */}
                             <div className="space-y-3">
                                 <label className="text-xs font-bold text-brand-gold uppercase tracking-wider ml-1 flex items-center gap-2">
                                     <CreditCard className="w-3 h-3" /> Compte à débiter
@@ -114,7 +114,7 @@ const Virement = () => {
                                 <div className="relative group">
                                     <select
                                         name="ribSource"
-                                        className={`w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-10 py-4 text-white appearance-none focus:border-brand-gold/50 focus:bg-white/10 focus:outline-none transition-all ${comptes.length > 1 ?  : }`}
+                                        className={`w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-10 py-4 text-white appearance-none focus:border-brand-gold/50 focus:bg-white/10 focus:outline-none transition-all ${comptes.length > 1 ? 'cursor-pointer hover:bg-white/[0.07]' : 'cursor-not-allowed opacity-70 bg-white/5'}`}
                                         value={donneesFormulaire.ribSource}
                                         onChange={gererChangement}
                                         required
@@ -122,7 +122,7 @@ const Virement = () => {
                                     >
                                         {comptes.map(cpt => (
                                             <option key={cpt.rib} value={cpt.rib} className="bg-brand-900 text-white">
-                                                {cpt.rib} (Solde: {cpt.solde.toLocaleString()} MAD) -- {cpt.statut}
+                                                {cpt.rib} (Solde: {cpt.solde.toLocaleString('fr-FR')} MAD) -- {cpt.statut}
                                             </option>
                                         ))}
                                     </select>
@@ -132,7 +132,7 @@ const Virement = () => {
                                 </div>
                             </div>
 
-                            {}
+                            {/* Amount */}
                             <div className="space-y-3">
                                 <label className="text-xs font-bold text-brand-gold uppercase tracking-wider ml-1 flex items-center gap-2">
                                     <DollarSign className="w-3 h-3" /> Montant
@@ -153,7 +153,7 @@ const Virement = () => {
                             </div>
                         </div>
 
-                        {}
+                        {/* Destination */}
                         <div className="space-y-3">
                             <label className="text-xs font-bold text-brand-gold uppercase tracking-wider ml-1 flex items-center gap-2">
                                 <Send className="w-3 h-3" /> RIB Destinataire
@@ -170,7 +170,7 @@ const Virement = () => {
                             <p className="text-xs text-slate-500 ml-1">Saisissez les 24 caractères du RIB sans espaces.</p>
                         </div>
 
-                        {}
+                        {/* Description */}
                         <div className="space-y-3">
                             <label className="text-xs font-bold text-brand-gold uppercase tracking-wider ml-1 flex items-center gap-2">
                                 <FileText className="w-3 h-3" /> Motif
@@ -204,7 +204,7 @@ const Virement = () => {
                 </div>
             </div>
 
-            {}
+            {/* CONFIRMATION MODAL */}
             {showConfirmModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in">
                     <div className="bg-[#0f172a] border border-white/10 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden animate-slide-up">
@@ -218,7 +218,7 @@ const Virement = () => {
                             <div className="bg-white/5 rounded-2xl p-6 mb-8 text-left space-y-4 font-mono text-sm border border-white/5">
                                 <div className="flex justify-between border-b border-white/5 pb-2">
                                     <span className="text-slate-500">Montant:</span>
-                                    <span className="text-white font-bold text-lg">{parseFloat(donneesFormulaire.montant).toLocaleString()} MAD</span>
+                                    <span className="text-white font-bold text-lg">{parseFloat(donneesFormulaire.montant).toLocaleString('fr-FR')} MAD</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-2">
                                     <span className="text-slate-500">Vers:</span>

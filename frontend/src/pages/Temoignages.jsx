@@ -1,5 +1,5 @@
-import { Quote, Star } from ;
-import { useLangue } from ;
+import { Quote, Star } from 'lucide-react';
+import { useLangue } from '../contexte/ContexteLangue';
 
 const Temoignages = () => {
     const { t } = useLangue();
@@ -53,7 +53,7 @@ const Temoignages = () => {
         <div className="w-full min-h-screen bg-slate-50 dark:bg-brand-900 pt-24 pb-12 transition-colors duration-300">
             <div className="container mx-auto px-4 md:px-6">
 
-                {}
+                {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <p className="text-brand-gold font-bold uppercase tracking-widest text-sm mb-3">
                         Témoignages
@@ -67,26 +67,26 @@ const Temoignages = () => {
                     <div className="w-20 h-1.5 bg-brand-gold mx-auto mt-8 rounded-full"></div>
                 </div>
 
-                {}
+                {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {testimonials.map((item, index) => (
                         <div
                             key={index}
                             className="bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
                         >
-                            {}
+                            {/* Card Header: Initial + Stars */}
                             <div className="flex justify-between items-start mb-6">
                                 <div className="w-12 h-12 bg-brand-gold/20 text-brand-gold rounded-full flex items-center justify-center font-bold text-xl">
                                     {item.initial}
                                 </div>
                                 <div className="flex gap-1 text-brand-gold">
                                     {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className={`w-4 h-4 ${i < item.rating ?  : }`} />
+                                        <Star key={i} className={`w-4 h-4 ${i < item.rating ? 'fill-current' : 'text-slate-300 dark:text-slate-600'}`} />
                                     ))}
                                 </div>
                             </div>
 
-                            {}
+                            {/* Content */}
                             <div className="relative mb-6 flex-grow">
                                 <Quote className="absolute -top-2 -left-2 w-6 h-6 text-brand-gold/20 transform -scale-x-100" />
                                 <p className="text-slate-600 dark:text-slate-300 italic pl-4 leading-relaxed relative z-10">
@@ -94,7 +94,7 @@ const Temoignages = () => {
                                 </p>
                             </div>
 
-                            {}
+                            {/* Author */}
                             <div className="border-t border-slate-100 dark:border-white/10 pt-4 mt-auto">
                                 <h4 className="font-bold text-brand-900 dark:text-white text-lg">{item.name}</h4>
                                 <span className="text-brand-gold text-xs font-bold uppercase tracking-wide">{item.role}</span>
@@ -103,10 +103,12 @@ const Temoignages = () => {
                     ))}
                 </div>
 
-                {}
+                {/* Bottom CTA */}
                 <div className="mt-20 text-center">
                     <div className="inline-block p-8 rounded-3xl bg-white dark:bg-white/5 border border-brand-gold/20 shadow-xl backdrop-blur-sm max-w-4xl w-full">
-                        <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-4">Rejoignez lune expérience bancaire réinventée.
+                        <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-4">Rejoignez l'élite</h3>
+                        <p className="text-slate-600 dark:text-slate-300 mb-8 max-w-xl mx-auto">
+                            Ouvrez votre compte en ligne en moins de 5 minutes et profitez d'une expérience bancaire réinventée.
                         </p>
                         <div className="flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                             <span className="text-lg font-bold text-slate-400">Forbes</span>

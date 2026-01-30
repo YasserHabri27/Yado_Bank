@@ -1,6 +1,6 @@
-import { useState, useEffect } from ;
-import { ChevronLeft, ChevronRight, Laptop, Smartphone, ShieldCheck, MonitorCheck, Wifi, Lock } from ;
-import RevealOnScroll from ;
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Laptop, Smartphone, ShieldCheck, MonitorCheck, Wifi, Lock } from 'lucide-react';
+import RevealOnScroll from '../composants/RevealOnScroll';
 
 const ExperienceNumerique = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -53,7 +53,7 @@ const ExperienceNumerique = () => {
 
     return (
         <section className="py-20 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-brand-900 dark:to-[#001226] relative overflow-hidden transition-colors duration-300">
-            {}
+            {/* Background Decor */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 skew-x-12 transform origin-top-right"></div>
 
             <div className="container mx-auto px-6 relative z-10">
@@ -65,7 +65,7 @@ const ExperienceNumerique = () => {
 
                 <div className="max-w-6xl mx-auto bg-white dark:bg-white/5 rounded-3xl shadow-2xl overflow-hidden border border-slate-100 dark:border-white/10 relative min-h-[500px] flex items-center">
 
-                    {}
+                    {/* Arrows */}
                     <button onClick={prevSlide} className="absolute left-4 z-20 p-3 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full text-brand-900 dark:text-white transition-all shadow-lg hidden md:block group">
                         <ChevronLeft className="w-8 h-8 group-hover:-translate-x-1 transition-transform" />
                     </button>
@@ -73,19 +73,19 @@ const ExperienceNumerique = () => {
                         <ChevronRight className="w-8 h-8 group-hover:translate-x-1 transition-transform" />
                     </button>
 
-                    {}
+                    {/* Slides */}
                     <div className="relative w-full h-full flex items-center justify-center p-8 md:p-12">
                         {slides.map((slide, index) => (
                             <div
                                 key={index}
                                 className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out px-12 py-8 flex flex-col md:flex-row items-center gap-12 ${index === currentSlide
-                                        ? 
+                                        ? 'opacity-100 translate-x-0'
                                         : index < currentSlide
-                                            ? 
-                                            : 
+                                            ? 'opacity-0 -translate-x-full'
+                                            : 'opacity-0 translate-x-full'
                                     }`}
                             >
-                                {}
+                                {/* Text Content */}
                                 <div className="md:w-1/2 space-y-6 text-left">
                                     <span className="text-brand-gold font-bold tracking-wider text-sm uppercase border border-brand-gold/30 px-3 py-1 rounded-full inline-block">
                                         {slide.subtitle}
@@ -97,7 +97,7 @@ const ExperienceNumerique = () => {
                                         {slide.desc}
                                     </p>
 
-                                    {}
+                                    {/* Icons */}
                                     <div className="flex gap-8 pt-6 border-t border-slate-100 dark:border-white/10">
                                         {slide.icons.map((item, i) => (
                                             <div key={i} className="text-center group">
@@ -110,7 +110,7 @@ const ExperienceNumerique = () => {
                                     </div>
                                 </div>
 
-                                {}
+                                {/* Visual Content */}
                                 <div className="md:w-1/2 flex justify-center relative">
                                     <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-white/10 transform rotate-1 hover:rotate-0 transition-transform duration-500 w-full max-w-md">
                                         <div className="aspect-[4/3] bg-slate-200 dark:bg-slate-800 relative">
@@ -119,24 +119,24 @@ const ExperienceNumerique = () => {
                                                 alt={slide.title}
                                                 className="w-full h-full object-cover"
                                             />
-                                            {}
+                                            {/* Gloss overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-tr from-black/0 via-white/10 to-white/30 pointer-events-none"></div>
                                         </div>
                                     </div>
-                                    {}
+                                    {/* Abstract shapes behind */}
                                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-gold/20 blur-3xl rounded-full -z-10 animate-pulse"></div>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    {}
+                    {/* Dots Indicator */}
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
                         {slides.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => setCurrentSlide(index)}
-                                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ?  : 
+                                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-brand-gold w-8' : 'bg-slate-300 dark:bg-white/30 hover:bg-brand-gold/50'
                                     }`}
                             />
                         ))}

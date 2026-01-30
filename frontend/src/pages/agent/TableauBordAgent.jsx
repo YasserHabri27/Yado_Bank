@@ -1,24 +1,24 @@
-import { useState, useEffect } from ;
-import { Link } from ;
-import api from ; 
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../../services/api'; // Ensure this path is correct based on your project structure
 import {
     Users, CreditCard, Search, PlusCircle, Trash2, Edit2,
     CheckCircle, XCircle, AlertTriangle, Filter, ChevronDown,
     MoreHorizontal, Shield, RefreshCw
-} from ;
-import { useLangue } from ;
+} from 'lucide-react';
+import { useLangue } from '../../contexte/ContexteLangue';
 
 const TableauBordAgent = () => {
     const { t } = useLangue();
-    
-    const [activeTab, setActiveTab] = useState();
+    // State management
+    const [activeTab, setActiveTab] = useState('clients');
     const [clients, setClients] = useState([]);
     const [comptes, setComptes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState();
-    const [actionLoading, setActionLoading] = useState(null); 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [actionLoading, setActionLoading] = useState(null); // ID of item being processed
 
-    
+    // Modal States
     const [showEditModal, setShowEditModal] = useState(false);
     const [editingClient, setEditingClient] = useState(null);
 
@@ -29,11 +29,11 @@ const TableauBordAgent = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            if (activeTab === ) {
-                const res = await api.get();
-                setClients(Array.isArray(res.data) ? res.data : []); 
+            if (activeTab === 'clients') {
+                const res = await api.get('/agent/clients');
+                setClients(Array.isArray(res.data) ? res.data : []); // Safety check
             } else {
-                const res = await api.get();
+                const res = await api.get('/agent/comptes');
                 setComptes(Array.isArray(res.data) ? res.data : []);
             }
         } catch (error) {
@@ -43,7 +43,7 @@ const TableauBordAgent = () => {
         }
     };
 
-    
+    // --- Client Actions ---
     const handleDeleteClient = async (id) => {
         if (!window.confirm("Êtes-vous sûr de vouloir supprimer ce client ? Cette action est irréversible.")) return;
 
@@ -65,7 +65,7 @@ const TableauBordAgent = () => {
 
     const saveClientChanges = async (e) => {
         e.preventDefault();
-        setActionLoading();
+        setActionLoading('save');
         try {
             await api.put(`/agent/clients/${editingClient.id}`, editingClient);
             setClients(clients.map(c => c.id === editingClient.id ? editingClient : c));
@@ -77,7 +77,7 @@ const TableauBordAgent = () => {
         }
     };
 
-    
+    // --- Account Actions ---
     const handleDeleteAccount = async (rib) => {
         if (!window.confirm("Supprimer ce compte bancaire ?")) return;
 
@@ -95,7 +95,7 @@ const TableauBordAgent = () => {
     const handleStatusChange = async (rib, newStatus) => {
         setActionLoading(rib);
         try {
-            await api.put(`/agent/comptes/${rib}/statut`, newStatus); 
+            await api.put(`/agent/comptes/${rib}/statut`, newStatus); // Send string directly as per backend
             setComptes(comptes.map(c => c.rib === rib ? { ...c, statut: newStatus } : c));
         } catch (error) {
             console.error("Status update failed:", error);
@@ -105,7 +105,7 @@ const TableauBordAgent = () => {
         }
     };
 
-    
+    // --- Filtering ---
     const filteredClients = clients.filter(c =>
         c.nom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         c.prenom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -119,55 +119,55 @@ const TableauBordAgent = () => {
 
     return (
         <div className="space-y-8 animate-fade-in pb-20">
-            {}
+            {/* Header Section */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-gradient-to-r from-brand-900 to-brand-800 p-8 rounded-3xl relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-16 -mt-32 blur-3xl"></div>
                 <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-2">
                         <span className="px-3 py-1 bg-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-widest rounded-full border border-brand-gold/20">
-                            {t()}
+                            {t('agent.badge')}
                         </span>
                     </div>
-                    <h2 className="text-4xl font-bold text-white mb-2 tracking-tight">{t()}</h2>
-                    <p className="text-slate-300 max-w-lg">{t()}</p>
+                    <h2 className="text-4xl font-bold text-white mb-2 tracking-tight">{t('agent.title')}</h2>
+                    <p className="text-slate-300 max-w-lg">{t('agent.subtitle')}</p>
                 </div>
 
                 <div className="flex gap-3 relative z-10 w-full md:w-auto">
                     <Link to="/agent/ajouter-client" className="flex-1 md:flex-none btn-premium py-3 px-6 flex items-center justify-center gap-2 text-sm">
-                        <Users className="w-4 h-4" /> {t()}
+                        <Users className="w-4 h-4" /> {t('agent.newClient')}
                     </Link>
                     <Link to="/agent/ajouter-compte" className="flex-1 md:flex-none bg-white/10 hover:bg-white/20 text-white py-3 px-6 rounded-xl font-bold transition-all flex items-center justify-center gap-2 text-sm border border-white/10 backdrop-blur-sm">
-                        <CreditCard className="w-4 h-4" /> {t()}
+                        <CreditCard className="w-4 h-4" /> {t('agent.newAccount')}
                     </Link>
                 </div>
             </div>
 
-            {}
+            {/* Main Content Area */}
             <div className="glass-panel overflow-hidden min-h-[600px] flex flex-col">
-                {}
+                {/* Tabs & Search Bar */}
                 <div className="p-6 border-b border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 bg-white/5">
-                    {}
+                    {/* Tabs */}
                     <div className="flex p-1 bg-black/20 rounded-xl">
                         <button
-                            onClick={() => setActiveTab()}
-                            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeTab ===  ?  : }`}
+                            onClick={() => setActiveTab('clients')}
+                            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeTab === 'clients' ? 'bg-brand-gold text-brand-950 shadow-lg' : 'text-slate-400 hover:text-white'}`}
                         >
-                            <Users className="w-4 h-4" /> {t()}
+                            <Users className="w-4 h-4" /> {t('agent.clientsTab')}
                         </button>
                         <button
-                            onClick={() => setActiveTab()}
-                            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeTab ===  ?  : }`}
+                            onClick={() => setActiveTab('comptes')}
+                            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeTab === 'comptes' ? 'bg-brand-gold text-brand-950 shadow-lg' : 'text-slate-400 hover:text-white'}`}
                         >
-                            <CreditCard className="w-4 h-4" /> {t()}
+                            <CreditCard className="w-4 h-4" /> {t('agent.accountsTab')}
                         </button>
                     </div>
 
-                    {}
+                    {/* Search */}
                     <div className="relative w-full md:w-96 group">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-brand-gold transition-colors" />
                         <input
                             type="text"
-                            placeholder={activeTab ===  ? t() : t()}
+                            placeholder={activeTab === 'clients' ? t('agent.searchClient') : t('agent.searchAccount')}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full bg-black/10 border border-white/5 rounded-xl pl-12 pr-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold/50 focus:bg-black/20 transition-all"
@@ -175,7 +175,7 @@ const TableauBordAgent = () => {
                     </div>
                 </div>
 
-                {}
+                {/* Content */}
                 <div className="flex-grow bg-black/10 p-6">
                     {loading ? (
                         <div className="h-full flex flex-col items-center justify-center text-slate-500 gap-4">
@@ -184,8 +184,8 @@ const TableauBordAgent = () => {
                         </div>
                     ) : (
                         <>
-                            {}
-                            {activeTab ===  && (
+                            {/* CLIENTS VIEW */}
+                            {activeTab === 'clients' && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {filteredClients.map((client) => (
                                         <div key={client.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-brand-gold/30 transition-all group relative overflow-hidden">
@@ -231,8 +231,8 @@ const TableauBordAgent = () => {
                                 </div>
                             )}
 
-                            {}
-                            {activeTab ===  && (
+                            {/* ACCOUNTS VIEW */}
+                            {activeTab === 'comptes' && (
                                 <div className="space-y-4">
                                     {filteredAccounts.map((compte) => (
                                         <div key={compte.rib} className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:bg-white/[0.07] transition-all">
@@ -243,9 +243,9 @@ const TableauBordAgent = () => {
                                                 <div>
                                                     <div className="flex items-center gap-3 mb-1">
                                                         <h3 className="font-mono text-lg text-white font-bold tracking-wider">{compte.rib}</h3>
-                                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${(compte.statut ===  || compte.statut === ) ?  :
-                                                            compte.statut ===  ?  :
-                                                                
+                                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${(compte.statut === 'ACTIF' || compte.statut === 'OUVERT') ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                                                            compte.statut === 'BLOQUE' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+                                                                'bg-orange-500/10 text-orange-400 border-orange-500/20'
                                                             }`}>
                                                             {compte.statut}
                                                         </span>
@@ -256,7 +256,7 @@ const TableauBordAgent = () => {
 
                                             <div className="text-right w-full md:w-auto">
                                                 <p className="text-slate-500 text-xs uppercase font-bold tracking-widest mb-1">Solde Disponible</p>
-                                                <p className="text-2xl font-bold text-white">{compte.solde?.toLocaleString()} <span className="text-brand-gold text-sm">MAD</span></p>
+                                                <p className="text-2xl font-bold text-white">{compte.solde?.toLocaleString('fr-FR')} <span className="text-brand-gold text-sm">MAD</span></p>
                                             </div>
 
                                             <div className="flex items-center gap-3 w-full md:w-auto border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6 justify-end">
@@ -264,14 +264,14 @@ const TableauBordAgent = () => {
                                                     <button className="p-2 hover:bg-white/10 rounded-lg text-slate-300 transition-colors">
                                                         <Shield className="w-5 h-5" />
                                                     </button>
-                                                    {}
+                                                    {/* Status Dropdown */}
                                                     <div className="absolute bottom-full right-0 mb-2 w-48 bg-[#0a0f1d] border border-white/10 rounded-xl shadow-xl overflow-hidden hidden group-hover/status:block z-50">
                                                         <div className="p-2 space-y-1">
-                                                            {[, , , ].map(status => (
+                                                            {['OUVERT', 'ACTIF', 'SUSPENDU', 'BLOQUE'].map(status => (
                                                                 <button
                                                                     key={status}
                                                                     onClick={() => handleStatusChange(compte.rib, status)}
-                                                                    className={`w-full text-left px-3 py-2 text-xs font-bold rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2 ${compte.statut === status ?  : }`}
+                                                                    className={`w-full text-left px-3 py-2 text-xs font-bold rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2 ${compte.statut === status ? 'text-brand-gold' : 'text-slate-400'}`}
                                                                 >
                                                                     {compte.statut === status && <CheckCircle className="w-3 h-3" />}
                                                                     {status}
@@ -303,7 +303,7 @@ const TableauBordAgent = () => {
                 </div>
             </div>
 
-            {}
+            {/* EDIT CLIENT MODAL */}
             {showEditModal && editingClient && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
                     <div className="bg-[#0f172a] border border-white/10 rounded-3xl w-full max-w-lg shadow-2xl relative overflow-hidden">

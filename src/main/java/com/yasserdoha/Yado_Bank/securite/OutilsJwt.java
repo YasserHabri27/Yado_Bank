@@ -12,9 +12,9 @@ import java.util.Date;
 @Component
 public class OutilsJwt {
 
-    
+    // Must be at least 256 bits (32 chars)
     private static final String JWT_SECRET = "YasserAndDohaBankSecretKeyForJwtSigning123456789";
-    private static final long JWT_EXPIRATION_MS = 3600000; 
+    private static final long JWT_EXPIRATION_MS = 3600000; // 1 hour
 
     private Key cle() {
         return Keys.hmacShaKeyFor(JWT_SECRET.getBytes());

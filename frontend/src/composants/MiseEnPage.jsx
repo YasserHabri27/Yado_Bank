@@ -1,9 +1,9 @@
-import { useState } from ;
-import { useNavigate, useLocation, Outlet } from ;
-import { useAuth } from ;
-import Navbar from ;
-import Sidebar from ;
-import Chatbot from ;
+import { useState } from 'react';
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { useAuth } from '../contexte/ContexteAuth';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
+import Chatbot from './Chatbot';
 
 const MiseEnPage = () => {
     const { utilisateur } = useAuth();
@@ -11,11 +11,11 @@ const MiseEnPage = () => {
     const location = useLocation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    
-    const publicRoutes = [, , , , , , ];
+    // Updated public routes list
+    const publicRoutes = ['/', '/connexion', '/services', '/apropos', '/contact', '/contacter-conseiller', '/mot-de-passe-oublie'];
 
     if (!utilisateur && !publicRoutes.includes(location.pathname)) {
-        
+        // Should be handled by ProtectedRoute but extra safety
         return null;
     }
 
