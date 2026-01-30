@@ -2,7 +2,7 @@ package com.yasserdoha.Yado_Bank.controleur;
 
 import com.yasserdoha.Yado_Bank.entite.Utilisateur;
 import com.yasserdoha.Yado_Bank.service.ServiceAdmin;
-import com.yasserdoha.Yado_Bank.dto.RequeteConnexion; // Reusing this DTO as it has username/password
+import com.yasserdoha.Yado_Bank.dto.RequeteConnexion; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,8 +29,7 @@ public class ControleurAdmin {
     @PostMapping("/agents")
     public ResponseEntity<?> creerAgent(@RequestBody RequeteConnexion requete) {
         try {
-            // Using RequeteConnexion here because it already has nomUtilisateur and
-            // motDePasse
+
             Utilisateur agent = serviceAdmin.creerAgent(requete.getNomUtilisateur(), requete.getMotDePasse());
             return ResponseEntity.ok(agent);
         } catch (Exception e) {

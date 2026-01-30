@@ -1,25 +1,25 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { traductions } from './traductions';
+import { createContext, useContext, useState, useEffect } from ;
+import { traductions } from ;
 
 const ContexteLangue = createContext(null);
 
 export const LangueProvider = ({ children }) => {
-    const [langue, setLangue] = useState(localStorage.getItem('langue') || 'fr');
+    const [langue, setLangue] = useState(localStorage.getItem() || );
 
     useEffect(() => {
-        localStorage.setItem('langue', langue);
-        if (langue === 'ar') {
-            document.documentElement.dir = 'rtl';
-            document.documentElement.lang = 'ar';
+        localStorage.setItem(, langue);
+        if (langue === ) {
+            document.documentElement.dir = ;
+            document.documentElement.lang = ;
         } else {
-            document.documentElement.dir = 'ltr';
+            document.documentElement.dir = ;
             document.documentElement.lang = langue;
         }
     }, [langue]);
 
-    // Helper to get nested translation
+    
     const t = (path) => {
-        const keys = path.split('.');
+        const keys = path.split();
         let current = traductions[langue];
         for (const key of keys) {
             if (current[key] === undefined) return path;

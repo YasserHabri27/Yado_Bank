@@ -1,7 +1,7 @@
-import { Award, Target, Users2, Building } from 'lucide-react';
-import { useLangue } from '../contexte/ContexteLangue';
-import RevealOnScroll from '../composants/RevealOnScroll';
-import Earth3D from '../composants/Earth3D';
+import { Award, Target, Users2, Building } from ;
+import { useLangue } from ;
+import RevealOnScroll from ;
+import Earth3D from ;
 
 const APropos = () => {
     const { t } = useLangue();
@@ -9,8 +9,8 @@ const APropos = () => {
     return (
         <div className="py-12 max-w-6xl mx-auto px-6">
             <RevealOnScroll className="text-center mb-16">
-                <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-2 block">{t('about.subtitle')}</span>
-                <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">{t('about.title')}</h2>
+                <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-2 block">{t()}</span>
+                <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">{t()}</h2>
                 <div className="w-24 h-1 bg-brand-gold mx-auto rounded-full mt-6"></div>
             </RevealOnScroll>
 
@@ -22,17 +22,17 @@ const APropos = () => {
                             <Building className="w-32 h-32 text-brand-gold opacity-50" />
                         </div>
                     </div>
-                    {/* Decorative Element */}
+                    {}
                     <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl"></div>
                 </div>
 
                 <div className="space-y-6">
-                    <h3 className="text-3xl font-bold text-brand-900 dark:text-white">{t('about.whoTitle')}</h3>
+                    <h3 className="text-3xl font-bold text-brand-900 dark:text-white">{t()}</h3>
                     <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-                        {t('about.whoDesc1')}
+                        {t()}
                     </p>
                     <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
-                        {t('about.whoDesc2')}
+                        {t()}
                     </p>
                 </div>
             </RevealOnScroll>
@@ -42,9 +42,9 @@ const APropos = () => {
                     <div className="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mb-6">
                         <Award className="w-6 h-6" />
                     </div>
-                    <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-3">{t('about.excellenceTitle')}</h4>
+                    <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-3">{t()}</h4>
                     <p className="text-slate-600 dark:text-slate-400">
-                        {t('about.excellenceDesc')}
+                        {t()}
                     </p>
                 </RevealOnScroll>
 
@@ -54,7 +54,7 @@ const APropos = () => {
                     </div>
                     <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-3">Innovation</h4>
                     <p className="text-slate-600 dark:text-slate-400">
-                        {t('about.excellenceDesc')}
+                        {t()}
                     </p>
                 </RevealOnScroll>
 
@@ -62,9 +62,9 @@ const APropos = () => {
                     <div className="w-12 h-12 bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 rounded-xl flex items-center justify-center mb-6">
                         <Users2 className="w-6 h-6" />
                     </div>
-                    <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-3">{t('about.proximityTitle')}</h4>
+                    <h4 className="text-xl font-bold text-brand-900 dark:text-white mb-3">{t()}</h4>
                     <p className="text-slate-600 dark:text-slate-400">
-                        {t('about.proximityDesc')}
+                        {t()}
                     </p>
                 </RevealOnScroll>
             </div>

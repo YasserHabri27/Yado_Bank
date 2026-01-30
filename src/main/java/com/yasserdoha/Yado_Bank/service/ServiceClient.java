@@ -29,13 +29,13 @@ public class ServiceClient {
     public List<CompteBancaire> obtenirComptesClient(Long idClient) {
         List<CompteBancaire> comptes = depotCompteBancaire.findByClient_Id(idClient);
 
-        // Sort by most recent operation date (UC-4 Requirement)
+        
         comptes.sort((c1, c2) -> {
             LocalDateTime lastOp1 = depotOperation.findTopByCompte_RibOrderByDateOperationDesc(c1.getRib())
                     .map(Operation::getDateOperation).orElse(LocalDateTime.MIN);
             LocalDateTime lastOp2 = depotOperation.findTopByCompte_RibOrderByDateOperationDesc(c2.getRib())
                     .map(Operation::getDateOperation).orElse(LocalDateTime.MIN);
-            return lastOp2.compareTo(lastOp1); // Descending
+            return lastOp2.compareTo(lastOp1); 
         });
 
         return comptes;

@@ -14,7 +14,7 @@ public class DataInitializer {
     @Bean
     CommandLineRunner init(DepotUtilisateur depotUtilisateur, PasswordEncoder passwordEncoder) {
         return args -> {
-            // Check if Agent exists
+            
             if (!depotUtilisateur.existsByNomUtilisateur("agent@yadobank.com")) {
                 Utilisateur agent = new Utilisateur();
                 agent.setNomUtilisateur("agent@yadobank.com");
@@ -25,10 +25,10 @@ public class DataInitializer {
                 System.out.println(">>> Seeded Agent: agent@yadobank.com / password123");
             }
 
-            // Check if Client exists
+            
             if (!depotUtilisateur.existsByNomUtilisateur("client@yadobank.com")) {
                 Utilisateur client = new Utilisateur();
-                client.setNomUtilisateur("client@yadobank.com"); // Using email as username for consistency
+                client.setNomUtilisateur("client@yadobank.com"); 
                 client.setEmail("client@yadobank.com");
                 client.setMotDePasse(passwordEncoder.encode("password123"));
                 client.setRole(Role.CLIENT);
@@ -37,7 +37,7 @@ public class DataInitializer {
                 System.out.println(">>> Seeded Client: client@yadobank.com / password123");
             }
 
-            // Check if Admin exists
+            
             if (!depotUtilisateur.existsByNomUtilisateur("admin@yadobank.com")) {
                 Utilisateur admin = new Utilisateur();
                 admin.setNomUtilisateur("admin@yadobank.com");

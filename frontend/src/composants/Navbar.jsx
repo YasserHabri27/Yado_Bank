@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexte/ContexteAuth';
-import { useLangue } from '../contexte/ContexteLangue';
-import { Building2, LogOut, User, ChevronDown, Menu, X, ArrowRight, ShieldCheck, Home, Layers, Info, Phone, Users2 } from 'lucide-react';
-import BoutonTheme from './BoutonTheme';
-import SelecteurLangue from './SelecteurLangue';
+import { useState } from ;
+import { Link, useNavigate, useLocation } from ;
+import { useAuth } from ;
+import { useLangue } from ;
+import { Building2, LogOut, User, ChevronDown, Menu, X, ArrowRight, ShieldCheck, Home, Layers, Info, Phone, Users2 } from ;
+import BoutonTheme from ;
+import SelecteurLangue from ;
 
 const Navbar = ({ onOpenSidebar }) => {
     const { utilisateur, deconnexion } = useAuth();
@@ -15,20 +15,20 @@ const Navbar = ({ onOpenSidebar }) => {
 
     const handleLogout = () => {
         deconnexion();
-        navigate('/connexion');
+        navigate();
     };
 
-    // Helper to format role name nicely
+    
     const formatRole = (role) => {
-        if (!role) return '';
-        return role.replace('ROLE_', '').replace('_', ' ');
+        if (!role) return ;
+        return role.replace(, ).replace(, );
     };
 
     return (
         <nav className="bg-white dark:bg-brand-900 border-b border-slate-200 dark:border-white/10 shadow-lg sticky top-0 z-50 transition-colors duration-300 font-sans">
             <div className="container mx-auto px-6 py-4">
                 <div className="flex justify-between items-center">
-                    {/* Logo */}
+                    {}
                     <Link to="/" className="flex items-center gap-3 group">
                         <div className="p-2.5 bg-brand-gold/10 rounded-lg group-hover:bg-brand-gold/20 transition-colors">
                             <img src="/logo.svg" alt="Yado Bank" className="w-7 h-7" />
@@ -37,22 +37,22 @@ const Navbar = ({ onOpenSidebar }) => {
                             <h1 className="text-xl font-bold tracking-wide text-brand-900 dark:text-white">
                                 Yasser Habri & <span className="text-brand-gold">Doha Allali</span>
                             </h1>
-                            <p className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">{t('navbar.subtitle')}</p>
+                            <p className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">{t()}</p>
                         </div>
                     </Link>
 
-                    {/* Desktop Actions */}
+                    {}
                     <div className="hidden lg:flex items-center gap-8">
-                        {/* Public Navigation Links (Only if NOT logged in) */}
+                        {}
                         {!utilisateur && (
                             <div className="flex items-center gap-6 text-sm font-semibold text-slate-600 dark:text-slate-300">
                                 <a href="/#home" className="flex items-center gap-2 hover:text-brand-gold transition-colors">
                                     <Home className="w-4 h-4" />
-                                    {t('navbar.home')}
+                                    {t()}
                                 </a>
                                 <a href="/#services" className="flex items-center gap-2 hover:text-brand-gold transition-colors">
                                     <Layers className="w-4 h-4" />
-                                    {t('navbar.services')}
+                                    {t()}
                                 </a>
                                 <a href="/#temoignages" className="flex items-center gap-2 hover:text-brand-gold transition-colors">
                                     <Users2 className="w-4 h-4" />
@@ -60,11 +60,11 @@ const Navbar = ({ onOpenSidebar }) => {
                                 </a>
                                 <a href="/#apropos" className="flex items-center gap-2 hover:text-brand-gold transition-colors">
                                     <Info className="w-4 h-4" />
-                                    {t('navbar.about')}
+                                    {t()}
                                 </a>
                                 <a href="/#contact" className="flex items-center gap-2 hover:text-brand-gold transition-colors">
                                     <Phone className="w-4 h-4" />
-                                    {t('navbar.contact')}
+                                    {t()}
                                 </a>
                             </div>
                         )}
@@ -76,7 +76,7 @@ const Navbar = ({ onOpenSidebar }) => {
                             <BoutonTheme />
                         </div>
 
-                        {/* Authenticated State */}
+                        {}
                         {utilisateur ? (
                             <div className="relative">
                                 <button
@@ -94,10 +94,10 @@ const Navbar = ({ onOpenSidebar }) => {
                                             {formatRole(utilisateur.role)}
                                         </p>
                                     </div>
-                                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isUserMenuOpen ?  : }`} />
                                 </button>
 
-                                {/* Dropdown Menu */}
+                                {}
                                 {isUserMenuOpen && (
                                     <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-brand-800 rounded-2xl shadow-2xl border border-slate-100 dark:border-white/10 overflow-hidden animate-slide-up ring-1 ring-black/5">
                                         <div className="p-5 border-b border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-white/5">
@@ -107,7 +107,7 @@ const Navbar = ({ onOpenSidebar }) => {
                                         <div className="p-2 space-y-1">
                                             <button
                                                 onClick={() => {
-                                                    navigate('/changer-mot-de-passe');
+                                                    navigate();
                                                     setIsUserMenuOpen(false);
                                                 }}
                                                 className="w-full text-left px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5 rounded-xl transition-colors flex items-center gap-3"
@@ -115,7 +115,7 @@ const Navbar = ({ onOpenSidebar }) => {
                                                 <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-white/10 flex items-center justify-center">
                                                     <ShieldCheck className="w-4 h-4" />
                                                 </div>
-                                                {t('navbar.security')}
+                                                {t()}
                                             </button>
                                             <div className="my-1 border-t border-slate-100 dark:border-white/5"></div>
                                             <button
@@ -125,24 +125,24 @@ const Navbar = ({ onOpenSidebar }) => {
                                                 <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-500/20 flex items-center justify-center">
                                                     <LogOut className="w-4 h-4" />
                                                 </div>
-                                                {t('navbar.logout')}
+                                                {t()}
                                             </button>
                                         </div>
                                     </div>
                                 )}
                             </div>
                         ) : (
-                            /* Public State: Login Button */
+                            
                             <Link
                                 to="/connexion"
                                 className="bg-brand-bp hover:bg-brand-800 dark:bg-brand-gold dark:text-brand-900 dark:hover:bg-brand-gold-light text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
                             >
                                 <User className="w-4 h-4" />
-                                {t('navbar.clientSpace')}
+                                {t()}
                             </Link>
                         )}
 
-                        {/* Sidebar Trigger */}
+                        {}
                         <button
                             onClick={onOpenSidebar}
                             className="bg-brand-900 dark:bg-white text-white dark:text-brand-900 p-3 rounded-xl hover:bg-brand-800 dark:hover:bg-slate-200 transition-colors shadow-lg flex items-center gap-2"
@@ -152,7 +152,7 @@ const Navbar = ({ onOpenSidebar }) => {
                         </button>
                     </div>
 
-                    {/* Mobile Menu Button */}
+                    {}
                     <button
                         className="lg:hidden p-2 text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -161,7 +161,7 @@ const Navbar = ({ onOpenSidebar }) => {
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
+                {}
                 {isMenuOpen && (
                     <div className="lg:hidden mt-4 pt-4 border-t border-slate-200 dark:border-white/10 animate-fade-in pb-4">
                         <div className="flex flex-col gap-4">
@@ -180,7 +180,7 @@ const Navbar = ({ onOpenSidebar }) => {
                                     </div>
                                     <button
                                         onClick={() => {
-                                            navigate('/changer-mot-de-passe');
+                                            navigate();
                                             setIsMenuOpen(false);
                                         }}
                                         className="px-4 py-3 text-left font-medium text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-white/5 rounded-xl"

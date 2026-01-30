@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../contexte/ContexteAuth';
+import { Navigate, Outlet } from ;
+import { useAuth } from ;
 
 const RouteProtegee = ({ allowedRoles }) => {
     const { utilisateur, chargement } = useAuth();

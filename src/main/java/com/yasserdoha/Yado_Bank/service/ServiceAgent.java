@@ -46,25 +46,30 @@ public class ServiceAgent {
             throw new RuntimeException("Erreur: Numéro d'identité déjà existant!");
         }
 
-        // Create Utilisateur
+        
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setNomUtilisateur(requete.getEmail());
         utilisateur.setEmail(requete.getEmail());
         String motDePasseBrut = UUID.randomUUID().toString().substring(0, 8);
         utilisateur.setMotDePasse(encodeurMotDePasse.encode(motDePasseBrut));
         utilisateur.setRole(Role.CLIENT);
+        depotUtilisateur.save(utilisateur);
 
-    }catch(
+        try {
+            serviceEmail.sendEmail(requete.getEmail(), "Bienvenue chez Yado Bank", "Votre mot de passe provisoire est : " + motDePasseBrut);
+        } catch (Exception e) {
+            System.err.println("Erreur envoi email: " + e.getMessage());
+        }
 
-    Exception e)
-    {
-        System.err.println("Erreur envoi email: " + e.getMessage());
-    }
+        Client client = new Client();
+        client.setNumeroIdentite(requete.getNumeroIdentite());
+        client.setPrenom(requete.getPrenom());
+        client.setNom(requete.getNom());
+        client.setDateNaissance(requete.getDateNaissance());
+        client.setAdressePostale(requete.getAdressePostale());
+        client.setUtilisateur(utilisateur);
 
-    // Create Client
-    Client client = new Client();client.setNumeroIdentite(requete.getNumeroIdentite());client.setPrenom(requete.getPrenom());client.setNom(requete.getNom());client.setDateNaissance(requete.getDateNaissance());client.setAdressePostale(requete.getAdressePostale());client.setUtilisateur(utilisateur);
-
-    return depotClient.save(client);
+        return depotClient.save(client);
     }
 
     public List<Client> tousLesClients() {
@@ -80,7 +85,7 @@ public class ServiceAgent {
     public Client modifierClient(Long id, RequeteClientDto requete) {
         Client client = clientParId(id);
 
-        // Check if new identity number is conflicting (if changed)
+
         if (!client.getNumeroIdentite().equals(requete.getNumeroIdentite()) &&
                 depotClient.existsByNumeroIdentite(requete.getNumeroIdentite())) {
             throw new RuntimeException("Erreur: Numéro d'identité déjà existant!");
@@ -96,9 +101,6 @@ public class ServiceAgent {
         return depotClient.save(client);
     }
 
-    @Transactional
-    public void supprimerClient(Long id) {
-        Client client = clientParId(id);
 
     @Transactional
     public void supprimerClient(Long id) {
@@ -151,7 +153,7 @@ public class ServiceAgent {
     @Transactional
     public void supprimerCompte(String rib) {
         CompteBancaire compte = compteParRib(rib);
-        // Additional checks could be added here (e.g., check if balance is zero)
+
         depotCompteBancaire.delete(compte);
     }
 }

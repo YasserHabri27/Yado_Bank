@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import api from '../../services/api';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, CreditCard, DollarSign, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from ;
+import api from ;
+import { useNavigate } from ;
+import { ArrowLeft, User, CreditCard, DollarSign, Loader2 } from ;
+import { Link } from ;
 
 const AjouterCompte = () => {
     const navigate = useNavigate();
     const [chargement, setChargement] = useState(false);
     const [donneesFormulaire, setDonneesFormulaire] = useState({
-        rib: '',
-        soldeInitial: '',
-        numeroIdentiteClient: ''
+        rib: ,
+        soldeInitial: ,
+        numeroIdentiteClient: 
     });
-    const [message, setMessage] = useState({ type: '', text: '' });
+    const [message, setMessage] = useState({ type: , text:  });
 
     const gererChangement = (e) => {
         setDonneesFormulaire({ ...donneesFormulaire, [e.target.name]: e.target.value });
@@ -21,21 +21,21 @@ const AjouterCompte = () => {
     const soumettreFormulaire = async (e) => {
         e.preventDefault();
         setChargement(true);
-        setMessage({ type: '', text: '' });
+        setMessage({ type: , text:  });
 
         if (donneesFormulaire.rib.length !== 24) {
-            setMessage({ type: 'error', text: 'Le RIB doit contenir exactement 24 caractères alphanumériques.' });
+            setMessage({ type: , text:  });
             setChargement(false);
             return;
         }
 
         try {
-            await api.post('/agent/comptes', donneesFormulaire);
-            setMessage({ type: 'success', text: 'Compte bancaire créé avec succès !' });
-            setTimeout(() => navigate('/agent/tableau-bord'), 2000);
+            await api.post(, donneesFormulaire);
+            setMessage({ type: , text:  });
+            setTimeout(() => navigate(), 2000);
         } catch (error) {
             const errorMsg = error.response?.data || "Une erreur est survenue";
-            setMessage({ type: 'error', text: typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg) });
+            setMessage({ type: , text: typeof errorMsg ===  ? errorMsg : JSON.stringify(errorMsg) });
         } finally {
             setChargement(false);
         }
@@ -58,8 +58,8 @@ const AjouterCompte = () => {
 
                 <div className="p-10 relative z-10">
                     {message.text && (
-                        <div className={`p-4 rounded-xl mb-8 flex items-center gap-3 ${message.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                            {message.type === 'success' ? <div className="w-2 h-2 rounded-full bg-green-500"></div> : <div className="w-2 h-2 rounded-full bg-red-500"></div>}
+                        <div className={`p-4 rounded-xl mb-8 flex items-center gap-3 ${message.type ===  ?  : }`}>
+                            {message.type ===  ? <div className="w-2 h-2 rounded-full bg-green-500"></div> : <div className="w-2 h-2 rounded-full bg-red-500"></div>}
                             {message.text}
                         </div>
                     )}

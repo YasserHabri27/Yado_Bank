@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import RevealOnScroll from '../composants/RevealOnScroll';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { useState } from ;
+import RevealOnScroll from ;
+import { ChevronDown, HelpCircle } from ;
 
 const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +17,9 @@ const FAQItem = ({ question, answer }) => {
                         {question}
                     </span>
                 </div>
-                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isOpen ?  : }`} />
             </button>
-            <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-48 opacity-100 mb-6' : 'max-h-0 opacity-0'}`}>
+            <div className={`overflow-hidden transition-all duration-300 ${isOpen ?  : }`}>
                 <p className="text-slate-600 dark:text-slate-300 pl-9 leading-relaxed">
                     {answer}
                 </p>

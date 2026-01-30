@@ -14,7 +14,7 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    // Pointcut pour cibler toutes les méthodes des classes dans le package service
+    
     @Before("execution(* com.yasserdoha.Yado_Bank.service.*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         logger.info("Entrée dans la méthode: {} de la classe: {}",

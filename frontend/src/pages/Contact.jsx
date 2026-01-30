@@ -1,23 +1,23 @@
-import { MapPin, Phone, Mail, Send, Clock, Globe2 } from 'lucide-react';
-import { useLangue } from '../contexte/ContexteLangue';
-import RevealOnScroll from '../composants/RevealOnScroll';
+import { MapPin, Phone, Mail, Send, Clock, Globe2 } from ;
+import { useLangue } from ;
+import RevealOnScroll from ;
 
 const Contact = () => {
     const { t } = useLangue();
     return (
         <div className="py-12 max-w-6xl mx-auto px-6">
             <RevealOnScroll className="text-center mb-16">
-                <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-2 block">{t('contact.subtitle')}</span>
-                <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">{t('contact.title')}</h2>
+                <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-2 block">{t()}</span>
+                <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">{t()}</h2>
                 <div className="w-24 h-1 bg-brand-gold mx-auto rounded-full mt-6"></div>
             </RevealOnScroll>
 
             <div className="grid md:grid-cols-2 gap-12">
-                {/* Contact Info */}
+                {}
                 <RevealOnScroll delay={0} className="bg-brand-900 text-white p-10 rounded-3xl relative overflow-hidden shadow-2xl">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
 
-                    <h3 className="text-2xl font-bold mb-8 relative z-10">{t('contact.coordsTitle')}</h3>
+                    <h3 className="text-2xl font-bold mb-8 relative z-10">{t()}</h3>
 
                     <div className="space-y-8 relative z-10">
                         <div className="flex items-start gap-4">
@@ -46,40 +46,40 @@ const Contact = () => {
                                 <Mail className="w-6 h-6 text-brand-gold" />
                             </div>
                             <div>
-                                <h4 className="font-bold text-lg mb-1">{t('common.email')}</h4>
+                                <h4 className="font-bold text-lg mb-1">{t()}</h4>
                                 <p className="text-slate-300">contact@yadobank.ma</p>
                             </div>
                         </div>
                     </div>
                 </RevealOnScroll>
 
-                {/* Contact Form */}
+                {}
                 <RevealOnScroll delay={200} className="bg-white dark:bg-brand-900/50 p-10 rounded-3xl border border-slate-100 dark:border-white/10 shadow-xl">
-                    <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-8">{t('contact.formTitle')}</h3>
+                    <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-8">{t()}</h3>
                     <form className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t('contact.name')}</label>
+                                <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t()}</label>
                                 <input type="text" className="w-full input-premium bg-slate-50 dark:bg-white/5" placeholder="Doe" />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t('contact.firstname')}</label>
+                                <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t()}</label>
                                 <input type="text" className="w-full input-premium bg-slate-50 dark:bg-white/5" placeholder="John" />
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t('common.email')}</label>
+                            <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t()}</label>
                             <input type="email" className="w-full input-premium bg-slate-50 dark:bg-white/5" placeholder="john@example.com" />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t('contact.message')}</label>
-                            <textarea rows="4" className="w-full input-premium bg-slate-50 dark:bg-white/5 resize-none" placeholder={t('contact.placeholderMsg')}></textarea>
+                            <label className="text-sm font-bold text-brand-900 dark:text-white ml-1">{t()}</label>
+                            <textarea rows="4" className="w-full input-premium bg-slate-50 dark:bg-white/5 resize-none" placeholder={t()}></textarea>
                         </div>
 
                         <button className="w-full btn-premium py-4 flex items-center justify-center gap-2">
-                            {t('contact.btnSend')}
+                            {t()}
                             <Send className="w-5 h-5 rtl:rotate-180" />
                         </button>
                     </form>

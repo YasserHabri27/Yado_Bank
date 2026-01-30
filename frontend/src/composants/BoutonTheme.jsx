@@ -1,5 +1,5 @@
-import { useTheme } from '../contexte/ContexteTheme';
-import { Sun, Moon } from 'lucide-react';
+import { useTheme } from ;
+import { Sun, Moon } from ;
 
 const BoutonTheme = () => {
     const { theme, toggleTheme } = useTheme();
@@ -12,7 +12,7 @@ const BoutonTheme = () => {
                 dark:bg-white/10 dark:hover:bg-white/20 dark:text-brand-gold"
             aria-label="Changer le thème"
         >
-            {theme === 'dark' ? (
+            {theme ===  ? (
                 <Sun className="w-5 h-5 animate-spin-slow" />
             ) : (
                 <Moon className="w-5 h-5 animate-pulse-slow" />

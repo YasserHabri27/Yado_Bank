@@ -1,29 +1,29 @@
-import { useState } from 'react';
-import { User, Mail, MessageSquare, Send, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { useState } from ;
+import { User, Mail, MessageSquare, Send, ArrowLeft, CheckCircle2 } from ;
 
 const ContacterConseiller = () => {
     const [step, setStep] = useState(1);
     const [selectedAdvisor, setSelectedAdvisor] = useState(null);
-    const [formData, setFormData] = useState({ subject: '', message: '' });
+    const [formData, setFormData] = useState({ subject: , message:  });
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
 
     const advisors = [
         {
-            id: 'yasser',
-            name: 'Yasser Habri',
-            role: 'Directeur Technique & Co-Fondateur',
-            email: 'yasser.habri.dev2@gmail.com',
-            initials: 'YH',
-            color: 'blue'
+            id: ,
+            name: ,
+            role: ,
+            email: ,
+            initials: ,
+            color: 
         },
         {
-            id: 'doha',
-            name: 'Doha Allali',
-            role: 'Directrice Générale & Co-Fondatrice',
-            email: 'dauphinellebleue@gmail.com',
-            initials: 'DA',
-            color: 'gold'
+            id: ,
+            name: ,
+            role: ,
+            email: ,
+            initials: ,
+            color: 
         }
     ];
 
@@ -35,7 +35,7 @@ const ContacterConseiller = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSending(true);
-        // Simulate sending
+        
         await new Promise(resolve => setTimeout(resolve, 1500));
         setSending(false);
         setSent(true);
@@ -45,7 +45,7 @@ const ContacterConseiller = () => {
         setStep(1);
         setSelectedAdvisor(null);
         setSent(false);
-        setFormData({ subject: '', message: '' });
+        setFormData({ subject: , message:  });
     };
 
     return (
@@ -63,12 +63,12 @@ const ContacterConseiller = () => {
                             onClick={() => handleSelect(advisor)}
                             className="bg-white dark:bg-brand-dark p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-white/10 cursor-pointer hover:scale-105 transition-all duration-300 group relative overflow-hidden"
                         >
-                            <div className={`absolute top-0 left-0 w-full h-2 ${advisor.color === 'gold' ? 'bg-brand-gold' : 'bg-brand-bp'}`}></div>
+                            <div className={`absolute top-0 left-0 w-full h-2 ${advisor.color ===  ?  : }`}></div>
 
                             <div className="flex flex-col items-center text-center">
-                                <div className={`w-24 h-24 rounded-full flex items-center justify-center text-2xl font-bold mb-6 shadow-lg ${advisor.color === 'gold'
-                                        ? 'bg-brand-gold text-brand-900'
-                                        : 'bg-brand-bp text-white'
+                                <div className={`w-24 h-24 rounded-full flex items-center justify-center text-2xl font-bold mb-6 shadow-lg ${advisor.color === 
+                                        ? 
+                                        : 
                                     }`}>
                                     {advisor.initials}
                                 </div>
@@ -132,7 +132,7 @@ const ContacterConseiller = () => {
                             disabled={sending}
                             className="w-full btn-premium py-4 flex items-center justify-center gap-2"
                         >
-                            {sending ? 'Envoi en cours...' : 'Envoyer le message'}
+                            {sending ?  : }
                             {!sending && <Send className="w-5 h-5" />}
                         </button>
                     </form>

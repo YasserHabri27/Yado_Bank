@@ -1,24 +1,24 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Globe, CreditCard, ChevronRight, Mail, User, X } from 'lucide-react';
-import { useAuth } from '../contexte/ContexteAuth';
-import { useLangue } from '../contexte/ContexteLangue';
-import RevealOnScroll from '../composants/RevealOnScroll';
-import TiltCard from '../composants/TiltCard';
-import FloatingShapes from '../composants/FloatingShapes';
-import Typewriter from '../composants/Typewriter';
-import { useEffect, useState } from 'react';
+import { Link, useNavigate } from ;
+import { ArrowRight, ShieldCheck, Globe, CreditCard, ChevronRight, Mail, User, X } from ;
+import { useAuth } from ;
+import { useLangue } from ;
+import RevealOnScroll from ;
+import TiltCard from ;
+import FloatingShapes from ;
+import Typewriter from ;
+import { useEffect, useState } from ;
 
 
-import CommentCaMarche from './CommentCaMarche';
-import FAQ from './FAQ';
+import CommentCaMarche from ;
+import FAQ from ;
 
-import ExperienceNumerique from './ExperienceNumerique';
+import ExperienceNumerique from ;
 
-// Imported Sections
-import Services from './Services';
-import Temoignages from './Temoignages';
-import APropos from './APropos';
-import Contact from './Contact';
+
+import Services from ;
+import Temoignages from ;
+import APropos from ;
+import Contact from ;
 
 const Accueil = () => {
     const { t } = useLangue();
@@ -26,44 +26,44 @@ const Accueil = () => {
     const navigate = useNavigate();
     const [showAdvisors, setShowAdvisors] = useState(false);
 
-    // Redirect authenticated users to their dashboards
+    
     useEffect(() => {
         if (utilisateur) {
-            if (utilisateur.role === 'ROLE_ADMIN') {
-                navigate('/admin/tableau-bord');
-            } else if (utilisateur.role === 'ROLE_AGENT_GUICHET') {
-                navigate('/agent/tableau-bord');
-            } else if (utilisateur.role === 'ROLE_CLIENT') {
-                navigate('/client/tableau-bord');
+            if (utilisateur.role === ) {
+                navigate();
+            } else if (utilisateur.role === ) {
+                navigate();
+            } else if (utilisateur.role === ) {
+                navigate();
             }
         }
     }, [utilisateur, navigate]);
 
-    if (utilisateur) return null; // Prevent flicker
+    if (utilisateur) return null; 
 
     return (
         <div className="animate-fade-in">
-            {/* ... Header ... */}
+            {}
 
-            {/* Services Section */}
+            {}
             <section id="services" className="bg-slate-50 dark:bg-brand-900 transition-colors duration-300">
                 <Services />
             </section>
 
-            {/* Digital Experience Carousel */}
+            {}
             <ExperienceNumerique />
 
-            {/* Comment Ca Marche Section */}
+            {}
             <CommentCaMarche />
-            {/* Hero Section */}
+            {}
             <section id="home" className="relative h-[700px] flex items-center overflow-hidden bg-[#003366]">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#003366] via-[#003366]/90 to-[#001F3F]/80 z-10"></div>
 
-                {/* 3D Floating Elements */}
+                {}
                 <FloatingShapes />
 
-                {/* Background Pattern */}
-                <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+                {}
+                <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: , backgroundSize:  }}></div>
 
                 <div className="container mx-auto px-6 relative z-20 pt-20">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -72,14 +72,14 @@ const Accueil = () => {
                                 YASSER HABRI & DOHA ALLALI BANK
                             </span>
                             <div className="text-5xl md:text-7xl font-bold mb-6 leading-tight min-h-[160px]">
-                                <Typewriter text={t('home.heroTitle')} speed={50} className="block" />
+                                <Typewriter text={t()} speed={50} className="block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">
-                                    <Typewriter text={t('home.heroTitleAccent')} speed={50} delay={1500} />
+                                    <Typewriter text={t()} speed={50} delay={1500} />
                                 </span>
                             </div>
                             <div className="text-xl text-slate-200 mb-8 leading-relaxed max-w-lg min-h-[80px]">
                                 <Typewriter
-                                    text={t('home.heroDesc')}
+                                    text={t()}
                                     speed={30}
                                     delay={3000}
                                     loop={true}
@@ -88,16 +88,16 @@ const Accueil = () => {
                             </div>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Link to="/connexion" className="bg-brand-gold hover:bg-white hover:text-brand-900 text-brand-900 font-bold py-4 px-8 rounded-xl transition-all shadow-lg shadow-brand-gold/20 flex items-center justify-center gap-2 group hover:scale-105 transform duration-300">
-                                    {t('home.accessAccount')}
+                                    {t()}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform rtl:rotate-180" />
                                 </Link>
                                 <a href="#services" className="bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-xl backdrop-blur-md border border-white/20 transition-all text-center hover:scale-105 transform duration-300">
-                                    {t('home.discoverOffers')}
+                                    {t()}
                                 </a>
                             </div>
                         </RevealOnScroll>
 
-                        {/* 3D Illustration / Tilt Card */}
+                        {}
                         <RevealOnScroll delay={200} className="hidden md:block">
                             <TiltCard className="relative z-10">
                                 <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-2xl relative overflow-hidden group">
@@ -136,39 +136,39 @@ const Accueil = () => {
                 </div>
             </section>
 
-            {/* Services Section */}
+            {}
             <section id="services" className="bg-slate-50 dark:bg-brand-900 transition-colors duration-300">
                 <Services />
             </section>
 
-            {/* Comment Ca Marche Section */}
+            {}
             <CommentCaMarche />
 
-            {/* A Propos Section */}
+            {}
             <section id="apropos" className="bg-white dark:bg-[#001226] transition-colors duration-300">
                 <APropos />
             </section>
 
-            {/* Testimonials Section */}
+            {}
             <section id="temoignages" className="bg-slate-50 dark:bg-brand-900 transition-colors duration-300">
                 <Temoignages />
             </section>
 
-            {/* FAQ Section */}
+            {}
             <FAQ />
 
-            {/* Contact Section */}
+            {}
             <section id="contact" className="bg-white dark:bg-[#001226] transition-colors duration-300 mb-20">
                 <Contact />
             </section>
 
-            {/* Final CTA Footer-like */}
+            {}
             <section className="py-20 bg-brand-dark relative overflow-hidden">
                 <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                     <div>
-                        <h2 className="text-3xl font-bold text-white mb-4">{t('home.readyTitle')}</h2>
+                        <h2 className="text-3xl font-bold text-white mb-4">{t()}</h2>
                         <p className="text-slate-300 max-w-lg">
-                            {t('home.readyDesc')}
+                            {t()}
                         </p>
                     </div>
                     <div>
@@ -176,17 +176,17 @@ const Accueil = () => {
                             onClick={() => setShowAdvisors(true)}
                             className="bg-white text-brand-900 font-bold py-4 px-10 rounded-xl hover:bg-brand-gold hover:text-white transition-all shadow-xl inline-block cursor-pointer"
                         >
-                            {t('home.contactAdvisor')}
+                            {t()}
                         </button>
                     </div>
                 </div>
             </section>
 
-            {/* Advisor Modal */}
+            {}
             {showAdvisors && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
                     <div className="relative w-full max-w-4xl bg-[#0f172a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl animate-scale-in">
-                        {/* Close Button */}
+                        {}
                         <button
                             onClick={() => setShowAdvisors(false)}
                             className="absolute top-4 right-4 p-2 bg-white/5 hover:bg-white/10 rounded-full text-slate-400 hover:text-white transition-colors z-10"
@@ -195,7 +195,7 @@ const Accueil = () => {
                         </button>
 
                         <div className="grid md:grid-cols-2">
-                            {/* Advisor 1: Doha */}
+                            {}
                             <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10 flex flex-col items-center text-center relative overflow-hidden group hover:bg-white/5 transition-colors">
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-purple-500"></div>
                                 <div className="w-24 h-24 rounded-full bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ring-2 ring-pink-500/30">
@@ -210,7 +210,7 @@ const Accueil = () => {
                                 </a>
                             </div>
 
-                            {/* Advisor 2: Yasser */}
+                            {}
                             <div className="p-8 md:p-12 flex flex-col items-center text-center relative overflow-hidden group hover:bg-white/5 transition-colors">
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
                                 <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ring-2 ring-blue-500/30">
@@ -227,7 +227,7 @@ const Accueil = () => {
                         </div>
 
                         <div className="bg-black/20 p-4 text-center text-slate-500 text-xs">
-                            {t('home.advisorNote') || "Our team is available 24/7 to assist you."}
+                            {t() || "Our team is available 24/7 to assist you."}
                         </div>
                     </div>
                 </div>

@@ -1,23 +1,23 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from ;
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    // Check localStorage or system preference (default to dark for premium feel)
+    
     const [theme, setTheme] = useState(
-        localStorage.getItem('theme') || 'dark'
+        localStorage.getItem() || 
     );
 
     useEffect(() => {
         const root = window.document.documentElement;
         console.log(`[THEME] Applying theme: ${theme}`);
-        root.classList.remove('light', 'dark');
+        root.classList.remove(, );
         root.classList.add(theme);
-        localStorage.setItem('theme', theme);
+        localStorage.setItem(, theme);
     }, [theme]);
 
     const toggleTheme = () => {
-        setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+        setTheme((prev) => (prev ===  ?  : ));
     };
 
     return (

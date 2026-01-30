@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import api from '../../services/api';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, User, CreditCard, Mail, Calendar, MapPin, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from ;
+import api from ;
+import { useNavigate } from ;
+import { ArrowLeft, ArrowRight, User, CreditCard, Mail, Calendar, MapPin, Loader2 } from ;
+import { Link } from ;
 
 const AjouterClient = () => {
     const navigate = useNavigate();
     const [chargement, setChargement] = useState(false);
     const [donneesFormulaire, setDonneesFormulaire] = useState({
-        numeroIdentite: '',
-        prenom: '',
-        nom: '',
-        email: '',
-        dateNaissance: '',
-        adressePostale: ''
+        numeroIdentite: ,
+        prenom: ,
+        nom: ,
+        email: ,
+        dateNaissance: ,
+        adressePostale: 
     });
-    const [message, setMessage] = useState({ type: '', text: '' });
+    const [message, setMessage] = useState({ type: , text:  });
 
     const gererChangement = (e) => {
         setDonneesFormulaire({ ...donneesFormulaire, [e.target.name]: e.target.value });
@@ -24,15 +24,15 @@ const AjouterClient = () => {
     const soumettreFormulaire = async (e) => {
         e.preventDefault();
         setChargement(true);
-        setMessage({ type: '', text: '' });
+        setMessage({ type: , text:  });
 
         try {
-            await api.post('/agent/clients', donneesFormulaire);
-            setMessage({ type: 'success', text: 'Client créé avec succès ! Identifiants envoyés par email.' });
-            setTimeout(() => navigate('/agent/tableau-bord'), 2000);
+            await api.post(, donneesFormulaire);
+            setMessage({ type: , text:  });
+            setTimeout(() => navigate(), 2000);
         } catch (error) {
             const errorMsg = error.response?.data || "Une erreur est survenue";
-            setMessage({ type: 'error', text: typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg) });
+            setMessage({ type: , text: typeof errorMsg ===  ? errorMsg : JSON.stringify(errorMsg) });
         } finally {
             setChargement(false);
         }
@@ -55,8 +55,8 @@ const AjouterClient = () => {
 
                 <div className="p-10 relative z-10">
                     {message.text && (
-                        <div className={`p-4 rounded-xl mb-8 flex items-center gap-3 ${message.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                            {message.type === 'success' ? <div className="w-2 h-2 rounded-full bg-green-500"></div> : <div className="w-2 h-2 rounded-full bg-red-500"></div>}
+                        <div className={`p-4 rounded-xl mb-8 flex items-center gap-3 ${message.type ===  ?  : }`}>
+                            {message.type ===  ? <div className="w-2 h-2 rounded-full bg-green-500"></div> : <div className="w-2 h-2 rounded-full bg-red-500"></div>}
                             {message.text}
                         </div>
                     )}

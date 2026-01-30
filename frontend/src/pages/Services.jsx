@@ -1,16 +1,16 @@
-import { ShieldCheck, Globe, CreditCard, PieChart, Smartphone, Users } from 'lucide-react';
-import { useLangue } from '../contexte/ContexteLangue';
-import RevealOnScroll from '../composants/RevealOnScroll';
+import { ShieldCheck, Globe, CreditCard, PieChart, Smartphone, Users } from ;
+import { useLangue } from ;
+import RevealOnScroll from ;
 
 const Services = () => {
     const { t } = useLangue();
     return (
         <div className="py-12">
             <RevealOnScroll className="text-center mb-16">
-                <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-2 block">{t('services.subtitle')}</span>
-                <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">{t('services.title')}</h2>
+                <span className="text-brand-gold font-bold tracking-wider text-xs uppercase mb-2 block">{t()}</span>
+                <h2 className="text-4xl font-bold text-brand-900 dark:text-white mb-4">{t()}</h2>
                 <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                    {t('services.intro')}
+                    {t()}
                 </p>
                 <div className="w-24 h-1 bg-brand-gold mx-auto rounded-full mt-6"></div>
             </RevealOnScroll>
@@ -19,38 +19,38 @@ const Services = () => {
                 {[
                     {
                         icon: <ShieldCheck className="w-8 h-8" />,
-                        title: t('services.cards.secure.title'),
-                        desc: t('services.cards.secure.desc'),
+                        title: t(),
+                        desc: t(),
                         color: "blue"
                     },
                     {
                         icon: <Globe className="w-8 h-8" />,
-                        title: t('services.cards.intl.title'),
-                        desc: t('services.cards.intl.desc'),
+                        title: t(),
+                        desc: t(),
                         color: "amber"
                     },
                     {
                         icon: <CreditCard className="w-8 h-8" />,
-                        title: t('services.cards.cards.title'),
-                        desc: t('services.cards.cards.desc'),
+                        title: t(),
+                        desc: t(),
                         color: "emerald"
                     },
                     {
                         icon: <PieChart className="w-8 h-8" />,
-                        title: t('services.cards.wealth.title'),
-                        desc: t('services.cards.wealth.desc'),
+                        title: t(),
+                        desc: t(),
                         color: "purple"
                     },
                     {
                         icon: <Smartphone className="w-8 h-8" />,
-                        title: t('services.cards.mobile.title'),
-                        desc: t('services.cards.mobile.desc'),
+                        title: t(),
+                        desc: t(),
                         color: "rose"
                     },
                     {
                         icon: <Users className="w-8 h-8" />,
-                        title: t('services.cards.support.title'),
-                        desc: t('services.cards.support.desc'),
+                        title: t(),
+                        desc: t(),
                         color: "cyan"
                     }
                 ].map((service, idx) => (

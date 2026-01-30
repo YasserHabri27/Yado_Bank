@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from ;
 
 const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
     const ref = useRef(null);
-    const [isVisible, setIsVisible] = useState(true); // Default to visible to prevent blank screen issues
+    const [isVisible, setIsVisible] = useState(true); 
 
     useEffect(() => {
-        // Fail-safe: Force visible after delay if IO fails or loads weirdly
+        
         const safetyTimer = setTimeout(() => {
             setIsVisible(true);
         }, 500);

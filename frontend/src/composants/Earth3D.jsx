@@ -1,10 +1,10 @@
-import createGlobe from 'cobe';
-import { useEffect, useRef, useState } from 'react';
-// Removing spring for simplicity and weight. Using standard requestAnimationFrame loop from cobe examples.
+import createGlobe from ;
+import { useEffect, useRef, useState } from ;
+
 
 const Earth3D = () => {
     const canvasRef = useRef();
-    // Locations: [lat, lon, size, name, description]
+    
     const locations = [
         { location: [40.7128, -74.0060], size: 0.1, name: "New York", desc: "Global Headquarters. The heart of Yado Bank." },
         { location: [51.5074, -0.1278], size: 0.1, name: "London", desc: "European Financial Hub. Serving our elite clients." },
@@ -14,10 +14,10 @@ const Earth3D = () => {
         { location: [33.5731, -7.5898], size: 0.1, name: "Casablanca", desc: "North Africa Regional Hub. Growing with you." },
     ];
 
-    // State for UI only
+    
     const [activeLocationName, setActiveLocationName] = useState(locations[0].name);
 
-    // Refs for animation loop (avoid checking dependency changes)
+    
     const activeLocationRef = useRef(locations[0]);
     const pointerInteracting = useRef(null);
     const pointerInteractionMovement = useRef(0);
@@ -51,9 +51,9 @@ const Earth3D = () => {
         }
 
         const createGlobeInstance = (w) => {
-            // Cobe coordinate system: [lat, lon]
-            // We want arcs from the "Active" location to others to visualize connections
-            // But if user requested arrows/lines, arcs are the best "3D Globe" equivalent.
+            
+            
+            
 
             globeInstance = createGlobe(canvasRef.current, {
                 devicePixelRatio: 2,
@@ -70,27 +70,27 @@ const Earth3D = () => {
                 glowColor: [0.83, 0.68, 0.21],
                 markers: locations.map(loc => ({ location: loc.location, size: loc.size })),
                 onRender: (state) => {
-                    // Interaction handling
+                    
                     if (pointerInteracting.current === null) {
-                        // Auto rotate indefinitely 360 degrees
+                        
                         phiRef.current += 0.005;
                     }
 
-                    // Smooth transition to focus location if active (and not dragging)
-                    // BUT: User said "it needs to rotate 360". 
-                    // If we force focus, it stops rotating 360.
-                    // Solution: Only focus when recently clicked, then maybe resume?
-                    // Actually, let's prioritize Manual Drag + Auto Spin. 
-                    // The "Focus" logic was locking the view. I will relax it.
-                    // Instead of locking phi to target, we just let it spin, 
-                    // unless user is interacting.
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
-                    // If the user selects a location, maybe we just highlight it 
-                    // but don't force the camera to lock on it, 
-                    // or we lock it for a moment then release?
-                    // Let's remove the "Soft Follow" lock to allow full 360 spin as requested.
+                    
+                    
+                    
+                    
 
-                    // Apply pointer drag
+                    
                     if (pointerInteracting.current !== null) {
                         const delta = pointerInteractionMovement.current;
                         pointerInteractionMovement.current = 0;
@@ -103,24 +103,24 @@ const Earth3D = () => {
                 }
             });
 
-            // Re-attach listeners to ensure they use the current closure if needed, 
-            // though they rely on refs so it's fine.
+            
+            
         };
 
-        // Pointer events
+        
         const onPointerDown = (e) => {
             pointerInteracting.current = e.clientX - pointerInteractionMovement.current;
-            if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing';
+            if (canvasRef.current) canvasRef.current.style.cursor = ;
         };
 
         const onPointerUp = () => {
             pointerInteracting.current = null;
-            if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
+            if (canvasRef.current) canvasRef.current.style.cursor = ;
         };
 
         const onPointerOut = () => {
             pointerInteracting.current = null;
-            if (canvasRef.current) canvasRef.current.style.cursor = 'grab';
+            if (canvasRef.current) canvasRef.current.style.cursor = ;
         };
 
         const onMouseMove = (e) => {
@@ -133,26 +133,26 @@ const Earth3D = () => {
 
         const canvas = canvasRef.current;
         if (canvas) {
-            canvas.style.cursor = 'grab';
-            canvas.addEventListener('pointerdown', onPointerDown);
-            canvas.addEventListener('pointerup', onPointerUp);
-            canvas.addEventListener('pointerout', onPointerOut);
-            canvas.addEventListener('mousemove', onMouseMove);
+            canvas.style.cursor = ;
+            canvas.addEventListener(, onPointerDown);
+            canvas.addEventListener(, onPointerUp);
+            canvas.addEventListener(, onPointerOut);
+            canvas.addEventListener(, onMouseMove);
         }
 
         return () => {
             if (globeInstance) globeInstance.destroy();
             resizeObserver.disconnect();
             if (canvas) {
-                canvas.removeEventListener('pointerdown', onPointerDown);
-                canvas.removeEventListener('pointerup', onPointerUp);
-                canvas.removeEventListener('pointerout', onPointerOut);
-                canvas.removeEventListener('mousemove', onMouseMove);
+                canvas.removeEventListener(, onPointerDown);
+                canvas.removeEventListener(, onPointerUp);
+                canvas.removeEventListener(, onPointerOut);
+                canvas.removeEventListener(, onMouseMove);
             }
         };
-    }, []); // Empty dependency array = mount once, stable!
+    }, []); 
 
-    // Derived active location for UI
+    
     const activeDesc = locations.find(l => l.name === activeLocationName)?.desc;
 
     return (
@@ -160,7 +160,7 @@ const Earth3D = () => {
             <div className="w-full md:w-1/2 aspect-square relative z-10">
                 <canvas
                     ref={canvasRef}
-                    style={{ width: '100%', height: '100%', aspectRatio: 1 }}
+                    style={{ width: , height: , aspectRatio: 1 }}
                     className="opacity-100 transition-opacity duration-500"
                 />
             </div>
@@ -173,7 +173,7 @@ const Earth3D = () => {
                             <button
                                 key={loc.name}
                                 onClick={() => handleLocationClick(loc)}
-                                className={`p-4 rounded-xl text-left transition-all duration-300 border ${activeLocationName === loc.name ? 'bg-brand-gold text-brand-900 border-brand-gold shadow-lg shadow-brand-gold/20' : 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10'}`}
+                                className={`p-4 rounded-xl text-left transition-all duration-300 border ${activeLocationName === loc.name ?  : }`}
                             >
                                 <p className="font-bold">{loc.name}</p>
                                 {activeLocationName === loc.name && (

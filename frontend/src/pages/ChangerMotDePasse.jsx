@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import api from '../services/api';
-import { Lock, Loader2 } from 'lucide-react';
+import { useState } from ;
+import api from ;
+import { Lock, Loader2 } from ;
 
 const ChangerMotDePasse = () => {
     const [donneesFormulaire, setDonneesFormulaire] = useState({
-        ancienMotDePasse: '',
-        nouveauMotDePasse: '',
-        confirmationMotDePasse: ''
+        ancienMotDePasse: ,
+        nouveauMotDePasse: ,
+        confirmationMotDePasse: 
     });
     const [chargement, setChargement] = useState(false);
-    const [message, setMessage] = useState({ type: '', text: '' });
+    const [message, setMessage] = useState({ type: , text:  });
 
     const gererChangement = (e) => {
         setDonneesFormulaire({ ...donneesFormulaire, [e.target.name]: e.target.value });
@@ -17,24 +17,24 @@ const ChangerMotDePasse = () => {
 
     const soumettreFormulaire = async (e) => {
         e.preventDefault();
-        setMessage({ type: '', text: '' });
+        setMessage({ type: , text:  });
 
         if (donneesFormulaire.nouveauMotDePasse !== donneesFormulaire.confirmationMotDePasse) {
-            setMessage({ type: 'error', text: 'Les nouveaux mots de passe ne correspondent pas.' });
+            setMessage({ type: , text:  });
             return;
         }
 
         setChargement(true);
         try {
-            await api.post('/auth/changer-mot-de-passe', {
+            await api.post(, {
                 ancienMotDePasse: donneesFormulaire.ancienMotDePasse,
                 nouveauMotDePasse: donneesFormulaire.nouveauMotDePasse
             });
-            setMessage({ type: 'success', text: 'Mot de passe modifié avec succès.' });
-            setDonneesFormulaire({ ancienMotDePasse: '', nouveauMotDePasse: '', confirmationMotDePasse: '' });
+            setMessage({ type: , text:  });
+            setDonneesFormulaire({ ancienMotDePasse: , nouveauMotDePasse: , confirmationMotDePasse:  });
         } catch (error) {
             const errorMsg = error.response?.data || "Une erreur est survenue";
-            setMessage({ type: 'error', text: typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg) });
+            setMessage({ type: , text: typeof errorMsg ===  ? errorMsg : JSON.stringify(errorMsg) });
         } finally {
             setChargement(false);
         }
@@ -52,7 +52,7 @@ const ChangerMotDePasse = () => {
 
                 <div className="p-8">
                     {message.text && (
-                        <div className={`p-4 rounded-lg mb-6 text-sm flex items-center gap-2 ${message.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                        <div className={`p-4 rounded-lg mb-6 text-sm flex items-center gap-2 ${message.type ===  ?  : }`}>
                             {message.text}
                         </div>
                     )}
