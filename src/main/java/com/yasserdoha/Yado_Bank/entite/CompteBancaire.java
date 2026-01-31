@@ -2,16 +2,9 @@ package com.yasserdoha.Yado_Bank.entite;
 
 import com.yasserdoha.Yado_Bank.enumerations.StatutCompte;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class CompteBancaire {
     @Id
     @Column(length = 24)
@@ -27,4 +20,46 @@ public class CompteBancaire {
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
+
+    public CompteBancaire() {
+    }
+
+    public CompteBancaire(String rib, BigDecimal solde, StatutCompte statut, Client client) {
+        this.rib = rib;
+        this.solde = solde;
+        this.statut = statut;
+        this.client = client;
+    }
+
+    public String getRib() {
+        return rib;
+    }
+
+    public void setRib(String rib) {
+        this.rib = rib;
+    }
+
+    public BigDecimal getSolde() {
+        return solde;
+    }
+
+    public void setSolde(BigDecimal solde) {
+        this.solde = solde;
+    }
+
+    public StatutCompte getStatut() {
+        return statut;
+    }
+
+    public void setStatut(StatutCompte statut) {
+        this.statut = statut;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

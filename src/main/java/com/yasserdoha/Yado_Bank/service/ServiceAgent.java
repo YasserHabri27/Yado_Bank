@@ -54,17 +54,23 @@ public class ServiceAgent {
         utilisateur.setMotDePasse(encodeurMotDePasse.encode(motDePasseBrut));
         utilisateur.setRole(Role.CLIENT);
 
-    }catch(
+        try {
+            serviceEmail.sendEmail(utilisateur.getEmail(), "Bienvenue chez YadoBank",
+                    "Votre mot de passe provisoire est : " + motDePasseBrut);
+        } catch (Exception e) {
+            System.err.println("Erreur envoi email: " + e.getMessage());
+        }
 
-    Exception e)
-    {
-        System.err.println("Erreur envoi email: " + e.getMessage());
-    }
+        // Create Client
+        Client client = new Client();
+        client.setNumeroIdentite(requete.getNumeroIdentite());
+        client.setPrenom(requete.getPrenom());
+        client.setNom(requete.getNom());
+        client.setDateNaissance(requete.getDateNaissance());
+        client.setAdressePostale(requete.getAdressePostale());
+        client.setUtilisateur(utilisateur);
 
-    // Create Client
-    Client client = new Client();client.setNumeroIdentite(requete.getNumeroIdentite());client.setPrenom(requete.getPrenom());client.setNom(requete.getNom());client.setDateNaissance(requete.getDateNaissance());client.setAdressePostale(requete.getAdressePostale());client.setUtilisateur(utilisateur);
-
-    return depotClient.save(client);
+        return depotClient.save(client);
     }
 
     public List<Client> tousLesClients() {
@@ -97,10 +103,7 @@ public class ServiceAgent {
     }
 
     @Transactional
-    public void supprimerClient(Long id) {
-        Client client = clientParId(id);
 
-    @Transactional
     public void supprimerClient(Long id) {
         Client client = clientParId(id);
 

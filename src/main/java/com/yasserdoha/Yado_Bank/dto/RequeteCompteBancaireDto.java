@@ -3,10 +3,8 @@ package com.yasserdoha.Yado_Bank.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 import java.math.BigDecimal;
 
-@Data
 public class RequeteCompteBancaireDto {
     @NotBlank(message = "Le RIB est obligatoire")
     @Size(min = 24, max = 24, message = "Le RIB doit contenir exactement 24 caractères")
@@ -17,4 +15,31 @@ public class RequeteCompteBancaireDto {
 
     @NotBlank(message = "L'identité du client est obligatoire")
     private String numeroIdentiteClient;
+
+    public RequeteCompteBancaireDto() {
+    }
+
+    public String getRib() {
+        return rib;
+    }
+
+    public void setRib(String rib) {
+        this.rib = rib;
+    }
+
+    public BigDecimal getSoldeInitial() {
+        return soldeInitial;
+    }
+
+    public void setSoldeInitial(BigDecimal soldeInitial) {
+        this.soldeInitial = soldeInitial;
+    }
+
+    public String getNumeroIdentiteClient() {
+        return numeroIdentiteClient;
+    }
+
+    public void setNumeroIdentiteClient(String numeroIdentiteClient) {
+        this.numeroIdentiteClient = numeroIdentiteClient;
+    }
 }

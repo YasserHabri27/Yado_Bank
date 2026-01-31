@@ -15,8 +15,6 @@ const Connexion = () => {
     const { t } = useLangue();
     const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         setNomUtilisateur('');
         setMotDePasse('');
@@ -27,7 +25,6 @@ const Connexion = () => {
         e.preventDefault();
         setErreur('');
         setLoading(true);
-        try {
         try {
             const userData = await login(nomUtilisateur, motDePasse);
             const role = userData.role;
